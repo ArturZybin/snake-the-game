@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Alegreya&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="main-container" id='mainContainer'>
+            <table id='field' class='field'></table>
+            <div id="leaderboard" class="leaderboard" draggable="false">
+                <div class="leaderboard-title">Leaderboard</div>
+                <div class="leader"><div class='leader-name'>--||--</div> : <div class='leader-score'>--||--</div></div>
+                <div class="leader"><div class='leader-name'>--||--</div> : <div class='leader-score'>--||--</div></div>
+                <div class="leader"><div class='leader-name'>--||--</div> : <div class='leader-score'>--||--</div></div>
+                <div class="leader"><div class='leader-name'>--||--</div> : <div class='leader-score'>--||--</div></div>
+                <div class="leader"><div class='leader-name'>--||--</div> : <div class='leader-score'>--||--</div></div>
+            </div>
+            <div id="arrowContainer" class="arrow-container">
+                <div class='arrow-left-container'><button id="arrowLeft" class="arrow arrow-left"></button></div>
+                <div class='arrow-up-container'><button id="arrowUp" class="arrow arrow-up"></button></div>
+                <div class='arrow-right-container'><button id="arrowRight" class="arrow arrow-right"></button></div>
+                <div class='arrow-down-container'><button id="arrowDown" class="arrow arrow-down"></button></div>
+            </div>
+            <button id="startButton" class="start-button">Start</button>
+            <img src="img/snake-in-cage.png" alt="snake" id="snakeCage" class="snake-cage" draggable="false">
+            <img src="img/gift.png" alt="gift" id="gift" class="gift" draggable="false">
+            <button id="settingsButton" class="settings-button"><img src="img/settings-icon.png" alt="settings" class="settings-icon" draggable="false"></button>
+
+
+            <div class="main-container-locker" id="mainContainerLocker" hidden></div>
+        </div>
+
+
+        <div id="settingsContainer" class="settings-container" hidden>
+            <button id="closeSettingsButton" class="close-settings-button settings-button"><img src="img/close-settings-icon.png" alt="close settings" class="close-settings-icon"></button>
+
+            <div id="snakeSettingsContainer" class="snake-settings-container single-settings-container">
+                <div class="snake-settings-title single-settings-container-title">Snake</div>
+                <form class='snake-settings-form'>
+                    <div class="snake-color-title">Color</div>
+                    <div class="snake-color-container">
+                        <div>
+                            <input type="radio" id="snake-color-1" name="snake-color" value="snake-color-1" checked>
+                            <label for="snake-color-1">
+                                <span>
+                                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/check-icn.svg" alt="Checked Icon" />
+                                </span>
+                            </label>
+                        </div>
+
+                        <div>
+                            <input type="radio" id="snake-color-2" name="snake-color" value="snake-color-2">
+                            <label for="snake-color-2">
+                                <span>
+                                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/check-icn.svg" alt="Checked Icon" />
+                                </span>
+                            </label>
+                        </div>
+
+                        <div>
+                            <input type="radio" id="snake-color-3" name="snake-color" value="snake-color-3">
+                            <label for="snake-color-3">
+                                <span>
+                                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/check-icn.svg" alt="Checked Icon" />
+                                </span>
+                            </label>
+                        </div>
+
+                        <div>
+                            <input type="radio" id="snake-color-4" name="snake-color" value="snake-color-4">
+                            <label for="snake-color-4">
+                                <span>
+                                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/check-icn.svg" alt="Checked Icon" />
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="snake-speed-title">Speed</div>
+                    <div class="speed-container">
+                        <input type="radio" id="speed-slow" name="snake-speed">
+                        <label for="speed-slow">Slow</label>
+                        <input checked type="radio" id="speed-medium" name="snake-speed">
+                        <label for="speed-medium">Medium</label>
+                        <input type="radio" id="speed-fast" name="snake-speed">
+                        <label for="speed-fast">Fast</label>
+                    </div>
+                </form>
+            </div>
+
+            <div id="fieldSettingsContainer" class="field-settings-container single-settings-container">
+                <div class="field-settings-title single-settings-container-title">Field</div>
+                <form class="field-settings-form">
+                    <div class='barriers-container'>
+                        <div class="barriers-title">Barriers</div>
+                        <input id="barriersCheckbox" class='settingsCheckbox' name="barriers-checkbox" type="checkbox" style="display:none"/>
+                        <label for="barriersCheckbox" class="toggle"><span></span></label>  
+                    </div>
+                    <div class='poison-container'>
+                        <div class="poison-title">Poison</div>
+                        <input id="poisonCheckbox" class='settingsCheckbox' name="poison-checkbox" type="checkbox" style="display:none" />
+                        <label for="poisonCheckbox" class="toggle"><span></span></label>
+                    </div>
+                    <div class='bonus-points-container'>
+                        <div class="bonus-points-title">Bonus points</div>
+                        <input checked id="bonusPointsCheckbox" class='settingsCheckbox' name="bonus-points-checkbox" type="checkbox" style="display:none" />
+                        <label for="bonusPointsCheckbox" class="toggle"><span></span></label>
+                    </div>
+                    <div class='throught-walls-container'>
+                        <div class="throught-walls-title">Throught walls</div>
+                        <input id="throughtWallsCheckbox" class='settingsCheckbox' name="throught-walls-checkbox" type="checkbox" style="display:none" />
+                        <label for="throughtWallsCheckbox" class="toggle"><span></span></label>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript" src='interface.js'></script>
+</body>
+</html>
