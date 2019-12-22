@@ -1,15 +1,17 @@
 'use strict'
 
-createField();
-addNewLeader('Arturchik', 1000);
-document.getElementById('settingsButton').onclick = openSettings;
-document.getElementById('closeSettingsButton').onclick = closeSettings;
+export {createClearField};
 
 
+createClearField();
+document.getElementById('settingsButton').addEventListener('click', openSettings);
+document.getElementById('closeSettingsButton').addEventListener('click', closeSettings);
+//document.addEventListener('keydown', triggerArrowClick);
+//document.addEventListener('keyup', untriggerArrowClick);
 
-
-function createField() {
+function createClearField() {
     let field = document.getElementById('field');
+    field.innerHTML = '';
     createFieldCells(field);
 }
 
@@ -53,8 +55,14 @@ function openSettings() {
     mainContainer.classList.add('blured');
     mainContainerLocker.removeAttribute('hidden');
     settingsContainer.removeAttribute('hidden');
+
+    document.addEventListener('keydown', closeSettingsByEscape)
 }
+
+
 function closeSettings() {
+    document.dispatchEvent(new CustomEvent('settingsClosed'))
+
     let mainContainer = document.getElementById('mainContainer');
     let mainContainerLocker = document.getElementById('mainContainerLocker');
     let settingsContainer = document.getElementById('settingsContainer');
@@ -62,4 +70,24 @@ function closeSettings() {
     mainContainer.classList.remove('blured');
     mainContainerLocker.hidden = 'true';
     settingsContainer.hidden = 'true';
+    document.removeEventListener('keydown', closeSettingsByEscape);
 }
+
+
+function closeSettingsByEscape(event) {
+    if (event.code != 'Escape') return;
+    closeSettings();
+}
+
+
+/*function triggerArrowClick(event) {
+    let arrowButton = event.target.closest('button');
+    switch (event.code) {
+        case 'ArrowRight':
+        case 'ArrowLeft':
+        case 'ArrowDown':
+        case 'ArrowUp':
+            arrowButton.classlist.add(.pressed)
+            break;
+    }
+}*/
