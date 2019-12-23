@@ -115,6 +115,124 @@ body
     border-radius: 5px;
     background-color: red;
 }
+.special-point
+{
+    position: absolute;
+    top: 5px;
+    left: 5px;
+
+    box-sizing: border-box;
+    width: 25px;
+    height: 25px;
+
+    -webkit-animation: vibrate .3s linear infinite both;
+            animation: vibrate .3s linear infinite both;
+
+    border: 1px solid white;
+    border-radius: 10px;
+}
+@-webkit-keyframes vibrate
+{
+    0%
+    {
+        -webkit-transform: translate(0);
+                transform: translate(0);
+    }20%
+    {
+        -webkit-transform: translate(-1px,1px);
+                transform: translate(-1px,1px);
+    }40%
+    {
+        -webkit-transform: translate(-1px,-1px);
+                transform: translate(-1px,-1px);
+    }60%
+    {
+        -webkit-transform: translate(1px,1px);
+                transform: translate(1px,1px);
+    }80%
+    {
+        -webkit-transform: translate(1px,-1px);
+                transform: translate(1px,-1px);
+    }100%
+    {
+        -webkit-transform: translate(0);
+                transform: translate(0);
+    }
+}@keyframes vibrate
+{
+    0%
+    {
+        -webkit-transform: translate(0);
+                transform: translate(0);
+    }20%
+    {
+        -webkit-transform: translate(-1px,1px);
+                transform: translate(-1px,1px);
+    }40%
+    {
+        -webkit-transform: translate(-1px,-1px);
+                transform: translate(-1px,-1px);
+    }60%
+    {
+        -webkit-transform: translate(1px,1px);
+                transform: translate(1px,1px);
+    }80%
+    {
+        -webkit-transform: translate(1px,-1px);
+                transform: translate(1px,-1px);
+    }100%
+    {
+        -webkit-transform: translate(0);
+                transform: translate(0);
+    }
+}
+.special-point-indicator
+{
+    position: absolute;
+    top: -5px;
+    left: -3px;
+
+    width: 130%;
+    height: 2px;
+
+    transition-duration: 3s;
+    -webkit-animation: decrease-to-zero 3s cubic-bezier(.250, .460, .450, .940) both;
+            animation: decrease-to-zero 3s cubic-bezier(.250, .460, .450, .940) both;
+
+    border: none;
+    background-color: #03fc36;
+}
+@-webkit-keyframes decrease-to-zero
+{
+    0%
+    {
+        -webkit-transform: scale(1);
+                transform: scale(1);
+    }100%
+    {
+        -webkit-transform: scale(0);
+                transform: scale(0);
+    }
+}@keyframes decrease-to-zero
+{
+    0%
+    {
+        -webkit-transform: scale(1);
+                transform: scale(1);
+    }100%
+    {
+        -webkit-transform: scale(0);
+                transform: scale(0);
+    }
+}
+.bonus-point
+{
+    background-color: red;
+}
+.poisoned-point
+{
+    background-color: #6da758;
+}
 
 .leaderboard
 {
@@ -172,10 +290,10 @@ body
 
     cursor: pointer;
     text-align: center;
-    background-color: transparent;
 
     border: none;
     border-radius: 50%;
+    background-color: transparent;
     box-shadow: 0 0 8px #23caed;
 }
 .arrows-container .arrow:hover
@@ -214,6 +332,7 @@ body
 {
     position: relative;
     left: 8px;
+
     width: 15px;
     height: 15px;
 
@@ -239,7 +358,8 @@ body
 {
     transform: rotate(135deg);
 }
-.active-screen-arrow {
+.active-screen-arrow
+{
     box-shadow: 0 0 3px #5ba6b5 !important;
 }
 

@@ -1,13 +1,31 @@
 'use strict';
 
+import {
+    fieldProperties
+} from './snakeFieldProperties.js';
+
 export {
-    startPointsGeneration
+    startPointsGeneration,
+    endPointsGeneration
 };
 
 
+let bonusPointsInterval;
+
+
+
 function startPointsGeneration() {
+    let generatingFrequency = 20000;
+    generateBonusPoint();
     generateNormalPoint();
+    bonusPointsInterval = setInterval(generateBonusPoint, generatingFrequency);
+
     document.addEventListener('normalPointEaten', moveNormalPoint);
+    document.addEventListener('bonusPointEaten', removeSpecialPoint);
+}
+
+function endPointsGeneration() {
+    clearInterval(bonusPointsInterval);
 }
 
 
@@ -20,11 +38,35 @@ function generateNormalPoint() {
 
     cell.append(point);
 }
-
 function moveNormalPoint() {
     let point = document.getElementById('normalPoint');
     let cell = getRandomEmptyCell();
     cell.append(point);
+}
+
+
+function generateBonusPoint() {
+    if (!fieldProperties.bonusPoints) return;
+
+    let point = document.createElement('div');
+    point.classList.add('special-point');
+    point.classList.add('bonus-point');
+    point.id = 'bonusPoint';
+
+    let pointIndicator = document.createElement('div');
+    pointIndicator.classList.add('special-point-indicator');
+    pointIndicator.id = 'bonusPointIndicator'
+
+    let cell = getRandomEmptyCell();
+    cell.append(point);
+    point.append(pointIndicator);
+
+    setTimeout(removeSpecialPoint, 3000)
+}
+function removeSpecialPoint() {
+    let point = document.getElementsByClassName('special-point')[0];
+    if (!point) return;
+    point.remove();
 }
 
 

@@ -11,7 +11,8 @@ import {
 } from './interfaceCreator.js';
 
 import {
-    startPointsGeneration
+    startPointsGeneration,
+    endPointsGeneration
 } from './pointsGenerator.js';
 
 import {
@@ -19,7 +20,8 @@ import {
     changeMovingDirection,
     getNextHeadCell,
     eatNextCell,
-    moveSnake
+    moveSnake,
+    addBodyPart
 } from './snakeScripts.js';
 
 
@@ -77,6 +79,11 @@ function oneStepAlgorithm(intervalId) {
         return;
     }
 
+    if (snakeProperties.newPartsQueueLength) {
+        addBodyPart();
+        snakeProperties.newPartsQueueLength--;
+    }
+
     eatNextCell();
     moveSnake();
 }
@@ -127,8 +134,11 @@ function isWinning() {
 function endGame() {
     document.removeEventListener('keydown', changeMovingDirection);
     disableScreenArrows();
+
     clearInterval(gameIntervalId);
     gameIntervalId = null;
+
+    endPointsGeneration();
 
     snakeProperties.snakePartsList = [];
     snakeProperties.movingDirection = 'right';

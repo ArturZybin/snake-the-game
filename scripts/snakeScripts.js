@@ -9,7 +9,8 @@ export {
     changeMovingDirection,
     getNextHeadCell,
     eatNextCell,
-    moveSnake
+    moveSnake,
+    addBodyPart
 };
 
 
@@ -33,12 +34,25 @@ function createStartingSnake() {
 
 
 function addBodyPart(rowIndex, cellIndex) {
+    // finding coordinates if they haven't been given
+    if (!rowIndex) {
+        let newBodyPartCoords = getNewBodyPartCoords();
+        rowIndex = newBodyPartCoords[0];
+        cellIndex = newBodyPartCoords[1];
+    }
+
     let bodyPart = document.createElement('div');
     bodyPart.classList.add('snake');
     bodyPart.classList.add('snake-body');
     bodyPart.style.background = snakeProperties.color;
     field.rows[rowIndex].cells[cellIndex].append(bodyPart);
     snakeProperties.snakePartsList.push(bodyPart);
+}
+function getNewBodyPartCoords() {
+    let lastBodyPart = snakeProperties.snakePartsList[snakeProperties.snakePartsList.length - 1];
+    let rowIndex = lastBodyPart.closest('tr').rowIndex;
+    let cellIndex = lastBodyPart.closest('td').cellIndex;
+    return [rowIndex, cellIndex];
 }
 
 
@@ -99,8 +113,6 @@ function getNextHeadCell() {
     return field.rows[nextRow].cells[nextCell];
 }
 
-
-
 function changeMovingDirection(event) {
     let nextMovingDirection = snakeProperties.movingDirection;
     switch (event.code) {
@@ -156,19 +168,16 @@ function eatNextCell() {
 
     let normalPoint = document.getElementById('normalPoint');
     if (nextCell.contains(normalPoint)) {
-        let newBodyPartCoords = getNewBodyPartCoords();
-        let rowIndex = newBodyPartCoords[0];
-        let cellIndex = newBodyPartCoords[1];
-        addBodyPart(rowIndex, cellIndex);
-
+        snakeProperties.newPartsQueueLength++;
         document.dispatchEvent(new CustomEvent('normalPointEaten'))
     }
-}
 
-
-function getNewBodyPartCoords() {
-    let lastBodyPart = snakeProperties.snakePartsList[snakeProperties.snakePartsList.length - 1];
-    let rowIndex = lastBodyPart.closest('tr').rowIndex;
-    let cellIndex = lastBodyPart.closest('td').cellIndex;
-    return [rowIndex, cellIndex];
+    let bonusPoint = document.getElementById('bonusPoint');
+    if (bonusPoint && nextCell.contains(bonusPoint)) {
+        let newBodyPartsCount = 3;
+        for (let i = 0; i < newBodyPartsCount; i++) {
+            snakeProperties.newPartsQueueLength++;
+        }
+        document.dispatchEvent(new CustomEvent('bonusPointEaten'))
+    }
 }

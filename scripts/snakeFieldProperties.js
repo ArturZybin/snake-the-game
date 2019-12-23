@@ -14,6 +14,7 @@ let snakeProperties = {
     nextMovingDirection: 'right',
     // includes head and all body parts
     snakePartsList: [],
+    newPartsQueueLength: 0,
 
     startingHeadPosition: [8, 9],
     startingBodyPartsPositions: [
