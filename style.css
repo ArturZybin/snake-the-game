@@ -153,7 +153,8 @@ body
     display: inline-block;
 }
 
-.arrow-container
+
+.arrows-container
 {
     position: absolute;
     top: 275px;
@@ -162,10 +163,8 @@ body
     width: 135px;
     height: 105px;
 }
-.arrow-container > div
+.arrows-container .arrow
 {
-    font-size: 1.8em;
-
     position: absolute;
 
     width: 45px;
@@ -173,21 +172,48 @@ body
 
     cursor: pointer;
     text-align: center;
+    background-color: transparent;
 
     border: none;
     border-radius: 50%;
-    box-shadow: 0 0 10px #23caed;
+    box-shadow: 0 0 8px #23caed;
 }
-.arrow-container > div:hover
+.arrows-container .arrow:hover
 {
-    box-shadow: 0 0 10px #5ba6b5;
+    box-shadow: 0 0 8px #5ba6b5;
 }
-.arrow-container > div:active
+.arrows-container .arrow:active
 {
-    box-shadow: 0 0 10px tomato;
+    box-shadow: 0 0 3px #5ba6b5;
 }
-.arrow-container > div .arrow
+.arrows-container .arrow:focus
 {
+    outline: none;
+}
+.arrows-container .arrow-left
+{
+    top: 28px;
+    left: 2px;
+}
+.arrows-container .arrow-up
+{
+    top: 4px;
+    left: 45px;
+}
+.arrows-container .arrow-right
+{
+    top: 28px;
+    right: 2px;
+}
+.arrows-container .arrow-down
+{
+    bottom: 4px;
+    left: 45px;
+}
+.arrows-container .arrow .arrow-picture
+{
+    position: relative;
+    left: 8px;
     width: 15px;
     height: 15px;
 
@@ -197,45 +223,24 @@ body
     border-width: 2px 2px 0 0;
     background: none;
 }
-.arrow-container > div .arrow:focus
-{
-    outline: none;
-}
-.arrow-container .arrow-left-container
-{
-    top: 28px;
-    left: 2px;
-}
-.arrow-container .arrow-up-container
-{
-    top: 4px;
-    left: 45px;
-}
-.arrow-container .arrow-right-container
-{
-    top: 28px;
-    right: 2px;
-}
-.arrow-container .arrow-down-container
-{
-    bottom: 4px;
-    left: 45px;
-}
-.arrow-container .arrow-left-container .arrow-left
+.arrows-container .arrow-left .arrow-left-picture
 {
     transform: rotate(225deg);
 }
-.arrow-container .arrow-up-container .arrow-up
+.arrows-container .arrow-up .arrow-up-picture
 {
     transform: rotate(-45deg);
 }
-.arrow-container .arrow-right-container .arrow-right
+.arrows-container .arrow-right .arrow-right-picture
 {
     transform: rotate(45deg);
 }
-.arrow-container .arrow-down-container .arrow-down
+.arrows-container .arrow-down .arrow-down-picture
 {
     transform: rotate(135deg);
+}
+.active-screen-arrow {
+    box-shadow: 0 0 3px #5ba6b5 !important;
 }
 
 .start-button

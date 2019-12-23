@@ -1,8 +1,16 @@
 'use strict';
 
-import {snakeProperties} from './snakeFieldProperties.js';
+import {
+    snakeProperties
+} from './snakeFieldProperties.js';
 
-export {createStartingSnake, changeMovingDirection, getNextHeadCell, eatNextCell, moveSnake};
+export {
+    createStartingSnake,
+    changeMovingDirection,
+    getNextHeadCell,
+    eatNextCell,
+    moveSnake
+};
 
 
 function createStartingSnake() {
@@ -53,7 +61,7 @@ function moveSnake() {
     nextHeadCell.append(snakeHead);
 
     for (let index = 1; index < snakePartsList.length; index++) {
-        field.rows[snakePartsCoordsList[index-1][0]].cells[snakePartsCoordsList[index-1][1]].append(snakePartsList[index]);
+        field.rows[snakePartsCoordsList[index - 1][0]].cells[snakePartsCoordsList[index - 1][1]].append(snakePartsList[index]);
     }
 }
 
@@ -92,6 +100,7 @@ function getNextHeadCell() {
 }
 
 
+
 function changeMovingDirection(event) {
     let nextMovingDirection = snakeProperties.movingDirection;
     switch (event.code) {
@@ -99,7 +108,6 @@ function changeMovingDirection(event) {
             nextMovingDirection = 'right';
             break;
         case 'ArrowLeft':
-            document.getElementById('arrowLeft').dispatchEvent(new Event('click'))
             nextMovingDirection = 'left';
             break;
         case 'ArrowDown':
@@ -134,7 +142,7 @@ function changeMovingDirection(event) {
             nextAxis = 'Y';
             break;
     }
-    if(previousAxis == nextAxis) return;
+    if (previousAxis == nextAxis) return;
 
     // direction can change only one time per snake step
     // so we save the next direction in another variable

@@ -1,8 +1,26 @@
 'use strict'
-import {snakeProperties, setNewSnakeProperties, fieldProperties, setNewFieldProperties} from './snakeFieldProperties.js';
-import {createClearField} from './interfaceCreator.js';
-import {startPointsGeneration} from './pointsGenerator.js';
-import {createStartingSnake, changeMovingDirection, getNextHeadCell, eatNextCell, moveSnake} from './snakeScripts.js';
+import {
+    snakeProperties,
+    setNewSnakeProperties,
+    fieldProperties,
+    setNewFieldProperties
+} from './snakeFieldProperties.js';
+
+import {
+    createClearField
+} from './interfaceCreator.js';
+
+import {
+    startPointsGeneration
+} from './pointsGenerator.js';
+
+import {
+    createStartingSnake,
+    changeMovingDirection,
+    getNextHeadCell,
+    eatNextCell,
+    moveSnake
+} from './snakeScripts.js';
 
 
 document.addEventListener('settingsClosed', setNewFieldProperties);
@@ -12,7 +30,9 @@ document.getElementById('settingsButton').addEventListener('click', pauseGame);
 
 let gameIntervalId;
 
+
 function startGame() {
+    // snake mustn't change color or speed while game
     document.removeEventListener('settingsClosed', setNewFieldProperties);
     document.removeEventListener('settingsClosed', setNewSnakeProperties);
 
@@ -24,11 +44,13 @@ function startGame() {
     setNewSnakeProperties();
     setNewFieldProperties();
     document.addEventListener('keydown', changeMovingDirection);
+    setupScreenArrows();
 
     createStartingSnake();
     gameIntervalId = setInterval(oneStepAlgorithm, snakeProperties.speed);
     startPointsGeneration();
 }
+
 
 function pauseGame() {
     if (!gameIntervalId) return;
@@ -71,6 +93,29 @@ function isLosing() {
     }
 }
 
+
+function setupScreenArrows() {
+    let arrowsList = Array.from(document.getElementsByClassName('arrow'));
+    arrowsList.forEach(arrow => {
+        // trigger keydown with event.code of appropriate keyboard arrow
+        // to use the same function for changing direction
+        let arrowEvent = new Event('keydown', {
+            bubbles: true,
+        });
+        arrowEvent.code = arrow.id;
+        arrow.onclick = () => document.dispatchEvent(arrowEvent);
+    })
+}
+
+
+function disableScreenArrows() {
+    let arrowsList = Array.from(document.getElementsByClassName('arrow'));
+    arrowsList.forEach(arrow => {
+        arrow.closest('div').onclick = null;
+    })
+}
+
+
 function isWinning() {
     let field = document.getElementById('field');
     if (snakeProperties.snakePartsList.length == field.rows.length * field.rows[0].cells.length) {
@@ -78,8 +123,10 @@ function isWinning() {
     }
 }
 
+
 function endGame() {
     document.removeEventListener('keydown', changeMovingDirection);
+    disableScreenArrows();
     clearInterval(gameIntervalId);
     gameIntervalId = null;
 
@@ -93,6 +140,7 @@ function endGame() {
     startButton.classList.remove('inactive-start-button');
     document.getElementById('startButton').addEventListener('click', startGame);
 }
+
 
 function showWinMessage() {
     alert('You win!')

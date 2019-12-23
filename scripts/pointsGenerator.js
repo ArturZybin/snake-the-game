@@ -1,12 +1,15 @@
 'use strict';
 
-export {startPointsGeneration};
+export {
+    startPointsGeneration
+};
 
 
 function startPointsGeneration() {
     generateNormalPoint();
     document.addEventListener('normalPointEaten', moveNormalPoint);
 }
+
 
 function generateNormalPoint() {
     let point = document.createElement('div');
@@ -24,11 +27,12 @@ function moveNormalPoint() {
     cell.append(point);
 }
 
+
 function getRandomEmptyCell() {
     let field = document.getElementById('field');
     for (let i = 0; i < 1000; i++) {
-        let randomRow = field.rows[ Math.floor( Math.random() * (field.rows.length) ) ];
-        let randomCell = randomRow.cells[ Math.floor( Math.random() * (randomRow.cells.length) ) ];
+        let randomRow = field.rows[Math.floor(Math.random() * (field.rows.length))];
+        let randomCell = randomRow.cells[Math.floor(Math.random() * (randomRow.cells.length))];
         if (randomCell.innerHTML == '') return randomCell;
     }
 
