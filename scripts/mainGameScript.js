@@ -13,6 +13,9 @@ document.getElementById('settingsButton').addEventListener('click', pauseGame);
 let gameIntervalId;
 
 function startGame() {
+    document.removeEventListener('settingsClosed', setNewFieldProperties);
+    document.removeEventListener('settingsClosed', setNewSnakeProperties);
+
     startButton.classList.add('inactive-start-button');
     startButton.removeEventListener('click', startGame);
 
@@ -83,6 +86,9 @@ function endGame() {
     snakeProperties.snakePartsList = [];
     snakeProperties.movingDirection = 'right';
     snakeProperties.nextMovingDirection = 'right';
+
+    document.addEventListener('settingsClosed', setNewFieldProperties);
+    document.addEventListener('settingsClosed', setNewSnakeProperties);
 
     startButton.classList.remove('inactive-start-button');
     document.getElementById('startButton').addEventListener('click', startGame);
