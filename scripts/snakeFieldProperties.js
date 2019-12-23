@@ -26,7 +26,7 @@ let snakeProperties = {
 
 let fieldProperties = {
     barriers: false,
-    poison: false,
+    poisonedPoints: false,
     bonusPoints: true,
     passingThroughtWalls: false,
 }

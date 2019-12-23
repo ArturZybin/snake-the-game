@@ -55,6 +55,13 @@ function getNewBodyPartCoords() {
     return [rowIndex, cellIndex];
 }
 
+function removeBodyPart() {
+    let snake = snakeProperties.snakePartsList;
+    if (snake.length == 1) {
+        return;
+    }
+    snake.pop().remove();
+}
 
 function moveSnake() {
     let field = document.getElementById('field');
@@ -179,5 +186,14 @@ function eatNextCell() {
             snakeProperties.newPartsQueueLength++;
         }
         document.dispatchEvent(new CustomEvent('bonusPointEaten'))
+    }
+
+    let poisonedPoint = document.getElementById('poisonedPoint');
+    if (poisonedPoint && nextCell.contains(poisonedPoint)) {
+        let removableBodyPartsCount = 3;
+        for (let i = 0; i < removableBodyPartsCount; i++) {
+            removeBodyPart();
+        }
+        document.dispatchEvent(new CustomEvent('poisonedPointEaten'))
     }
 }

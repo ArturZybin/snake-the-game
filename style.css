@@ -195,9 +195,8 @@ body
     width: 130%;
     height: 2px;
 
-    transition-duration: 3s;
-    -webkit-animation: decrease-to-zero 3s cubic-bezier(.250, .460, .450, .940) both;
-            animation: decrease-to-zero 3s cubic-bezier(.250, .460, .450, .940) both;
+    -webkit-animation: decrease-to-zero 4s cubic-bezier(.250, .460, .450, .940) both;
+            animation: decrease-to-zero 4s cubic-bezier(.250, .460, .450, .940) both;
 
     border: none;
     background-color: #03fc36;
@@ -206,23 +205,23 @@ body
 {
     0%
     {
-        -webkit-transform: scale(1);
-                transform: scale(1);
+        -webkit-width: 130%;
+                width: 130%;
     }100%
     {
-        -webkit-transform: scale(0);
-                transform: scale(0);
+        -webkit-width: 0%;
+                width: 0%;
     }
 }@keyframes decrease-to-zero
 {
     0%
     {
-        -webkit-transform: scale(1);
-                transform: scale(1);
+        -webkit-width: 130%;
+                width: 130%;
     }100%
     {
-        -webkit-transform: scale(0);
-                transform: scale(0);
+        -webkit-width: 0%;
+                width: 0%;
     }
 }
 .bonus-point

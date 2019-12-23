@@ -70,6 +70,7 @@ function resumeGame() {
 function oneStepAlgorithm(intervalId) {
     snakeProperties.movingDirection = snakeProperties.nextMovingDirection;
     if (isLosing()) {
+        showLoseMessage();
         endGame();
         return;
     }
@@ -86,18 +87,6 @@ function oneStepAlgorithm(intervalId) {
 
     eatNextCell();
     moveSnake();
-}
-
-
-function isLosing() {
-    let snake = snakeProperties.snakePartsList;
-    let nextHeadCell = getNextHeadCell();
-
-    for (let snakePart of snake) {
-        if (snakePart.closest('td') == nextHeadCell && snakePart != snake[0]) {
-            return true;
-        }
-    }
 }
 
 
@@ -129,6 +118,17 @@ function isWinning() {
         return true;
     }
 }
+function isLosing() {
+    let snake = snakeProperties.snakePartsList;
+    let nextHeadCell = getNextHeadCell();
+
+    for (let snakePart of snake) {
+        if (snakePart.closest('td') == nextHeadCell && snakePart != snake[0]) {
+            return true;
+        }
+    }
+    if (snake.length == 1) return true;
+}
 
 
 function endGame() {
@@ -153,5 +153,8 @@ function endGame() {
 
 
 function showWinMessage() {
-    alert('You win!')
+    alert('You win!');
+}
+function showLoseMessage() {
+    alert('You lose!');
 }
