@@ -1,7 +1,8 @@
 'use strict';
 
 import {
-    snakeProperties
+    snakeProperties,
+    fieldProperties
 } from './snakeFieldProperties.js';
 
 export {
@@ -87,9 +88,13 @@ function moveSnake() {
 }
 
 
+// can return undefined (cell with coordinated out of field)
+// if option 'passing throught walls' is off
 function getNextHeadCell() {
     let snakeHead = snakeProperties.snakePartsList[0];
     let direction = snakeProperties.movingDirection;
+
+    let passing = fieldProperties.passingThroughtWalls;
 
     let fieldSize = document.getElementById('field').rows.length;
     let currentRow = snakeHead.closest('tr').rowIndex;
@@ -100,25 +105,27 @@ function getNextHeadCell() {
     switch (snakeProperties.movingDirection) {
         case 'right':
             nextCell++;
-            if (nextCell == fieldSize) nextCell = 0;
+            if ((nextCell == fieldSize) && passing) nextCell = 0;
             break;
         case 'left':
             nextCell--;
-            if (nextCell == -1) nextCell = fieldSize - 1;
+            if ((nextCell == -1) && passing) nextCell = fieldSize - 1;
             break;
         case 'down':
             nextRow++;
-            if (nextRow == fieldSize) nextRow = 0;
+            if ((nextRow == fieldSize) && passing) nextRow = 0;
             break;
         case 'up':
             nextRow--;
-            if (nextRow == -1) nextRow = fieldSize - 1;
+            if ((nextRow == -1) && passing) nextRow = fieldSize - 1;
             break;
     }
 
     let field = document.getElementById('field');
+    if (!field.rows[nextRow]) return field.rows[nextRow];
     return field.rows[nextRow].cells[nextCell];
 }
+
 
 function changeMovingDirection(event) {
     let nextMovingDirection = snakeProperties.movingDirection;

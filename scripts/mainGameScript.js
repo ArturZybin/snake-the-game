@@ -69,13 +69,14 @@ function resumeGame() {
 
 function oneStepAlgorithm(intervalId) {
     snakeProperties.movingDirection = snakeProperties.nextMovingDirection;
-    if (isLosing()) {
-        showLoseMessage();
+
+    if (isWinning()) {
+        showWinMessage();
         endGame();
         return;
     }
-    if (isWinning()) {
-        showWinMessage();
+    if (isLosing()) {
+        showLoseMessage();
         endGame();
         return;
     }
@@ -118,6 +119,7 @@ function isWinning() {
         return true;
     }
 }
+
 function isLosing() {
     let snake = snakeProperties.snakePartsList;
     let nextHeadCell = getNextHeadCell();
@@ -128,6 +130,14 @@ function isLosing() {
         }
     }
     if (snake.length == 1) return true;
+
+    if (!fieldProperties.passingThroughtWalls) {
+        let fieldSize = document.getElementById('field').rows.length;
+
+        if (!nextHeadCell) {
+            return true;
+        }
+    }
 }
 
 
