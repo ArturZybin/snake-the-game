@@ -81,12 +81,12 @@ function oneStepAlgorithm(intervalId) {
     snakeProperties.movingDirection = snakeProperties.nextMovingDirection;
 
     if (isWinning()) {
-        showWinMessage();
+        showMessage('win');
         endGame();
         return;
     }
     if (isLosing()) {
-        showLoseMessage();
+        showMessage('lose');
         endGame();
         return;
     }
@@ -178,9 +178,27 @@ function endGame() {
 }
 
 
-function showWinMessage() {
-    alert('You win!');
-}
-function showLoseMessage() {
-    alert('You lose!');
+// CSS-class for the message must start with the text value
+function showMessage(text) {
+    let mainContainerLocker = document.getElementById('mainContainerLocker');
+    let mainContainer = document.getElementById('mainContainer');
+    mainContainerLocker.removeAttribute('hidden');
+    mainContainer.classList.add('blured');
+
+    text = text.toLowerCase();
+
+    let message = document.getElementById('message');
+    message.textContent = text;
+    message.removeAttribute('hidden');
+    message.classList.add('animate-message');
+    message.classList.add(`${text}-message`);
+
+    setTimeout(() => {
+        message.hidden = 'true';
+        message.classList.remove('animate-message');
+        message.classList.remove(`${text}-message`);
+
+        mainContainer.classList.remove('blured');
+        mainContainerLocker.hidden = 'true';
+    }, 1000)
 }
