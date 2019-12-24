@@ -20,6 +20,7 @@ document.getElementById('settingsButton').addEventListener('click', openSettings
 document.getElementById('closeSettingsButton').addEventListener('click', closeSettings);
 document.addEventListener('keydown', triggerScreenArrowClick);
 document.addEventListener('keyup', untriggerScreenArrowClick);
+document.getElementById('gift').addEventListener('click', takeGift);
 
 
 function createClearField() {
@@ -168,4 +169,13 @@ function changeScore(changing) {
 function setScore(score) {
     let scoreWindow = document.getElementById('scoreWindow');
     scoreWindow.textContent = score;
+}
+
+function takeGift() {
+    let giftBox = document.getElementById('gift');
+    let giftsList = ['img/candy.png', 'img/cake.png', 'img/bear.png'];
+
+    let randomIndex = Math.floor(Math.random() * 3)
+    giftBox.src = giftsList[randomIndex];
+    giftBox.style.animation = 'none';
 }
