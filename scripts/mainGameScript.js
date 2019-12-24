@@ -8,13 +8,16 @@ import {
 
 import {
     createClearField,
-    createBarriers
-} from './interfaceCreator.js';
+    createBarriers,
+    changeScore,
+    setScore,
+    updateLeaderboard
+} from './interfaceManager.js';
 
 import {
     startPointsGeneration,
     endPointsGeneration
-} from './pointsGenerator.js';
+} from './foodManager.js';
 
 import {
     createStartingSnake,
@@ -36,11 +39,13 @@ let gameIntervalId;
 
 
 function startGame() {
-    startButton.classList.add('inactive-start-button');
-    startButton.removeEventListener('click', startGame);
+    startButton.hidden = 'true';
+    scoreWindow.removeAttribute('hidden');
 
     setNewSnakeProperties();
     setNewFieldProperties();
+
+    setScore(40);
 
     createClearField();
     if (fieldProperties.barriers) {
@@ -88,6 +93,7 @@ function oneStepAlgorithm(intervalId) {
 
     if (snakeProperties.newPartsQueueLength) {
         addBodyPart();
+        changeScore(10);
         snakeProperties.newPartsQueueLength--;
     }
 
@@ -153,6 +159,8 @@ function isLosing() {
 
 
 function endGame() {
+    updateLeaderboard();
+
     document.removeEventListener('keydown', changeMovingDirection);
     disableScreenArrows();
 
@@ -165,8 +173,8 @@ function endGame() {
     snakeProperties.movingDirection = 'right';
     snakeProperties.nextMovingDirection = 'right';
 
-    startButton.classList.remove('inactive-start-button');
-    document.getElementById('startButton').addEventListener('click', startGame);
+    scoreWindow.hidden = 'true';
+    startButton.removeAttribute('hidden')
 }
 
 

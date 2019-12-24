@@ -19,6 +19,7 @@
                 <div class="leader"><div class='leader-name'>--||--</div> : <div class='leader-score'>--||--</div></div>
                 <div class="leader"><div class='leader-name'>--||--</div> : <div class='leader-score'>--||--</div></div>
             </div>
+            <div hidden id="scoreWindow" class="score-window">40</div>
             <div id="arrowsContainer" class="arrows-container">
                 <button id="ArrowLeft" class="arrow arrow-left"><div class='arrow-picture arrow-left-picture'></div></button>
                 <button id="ArrowUp" class="arrow arrow-up"><div class='arrow-picture arrow-up-picture'></div></button>
@@ -117,11 +118,16 @@
                     </div>
                 </form>
             </div>
+
+            <div id="nameSettingsContainer" class="name-settings-container single-settings-container">
+                <div class="single-settings-container-title name-settings-title">Name</div>
+                <input type="text" id="nameField" class="name-field" value="Worm" maxlength="7" autocomplete="off" spellcheck="false">
+            </div>
         </div>
     </div>
 
 
-    <script type='module' src='scripts\interfaceCreator.js'></script>
+    <script type='module' src='scripts\interfaceManager.js'></script>
     <script type='module' src='scripts\mainGameScript.js'></script>
 </body>
 </html>

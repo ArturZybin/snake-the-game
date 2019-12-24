@@ -6,11 +6,16 @@ import {
 
 export {
     createClearField,
-    createBarriers
+    createBarriers,
+    changeScore,
+    setScore,
+    updateLeaderboard
 };
 
 
 createClearField();
+
+
 document.getElementById('settingsButton').addEventListener('click', openSettings);
 document.getElementById('closeSettingsButton').addEventListener('click', closeSettings);
 document.addEventListener('keydown', triggerScreenArrowClick);
@@ -65,21 +70,6 @@ function createBarrierCell(cell) {
     let barrier = document.createElement('div');
     barrier.classList.add('barrier');
     cell.append(barrier);
-}
-
-function addNewLeader(newLeadername, newLeaderScore) {
-    let leaderboard = document.getElementById('leaderboard');
-    let leadersList = Array.from(leaderboard.querySelectorAll('.leader'));
-
-    for (let currentLeader of leadersList) {
-        let currentLeaderScore = currentLeader.querySelector('.leader-score').textContent;
-
-        if (currentLeaderScore == '--||--' || parseInt(currentLeaderScore) < newLeaderScore) {
-            currentLeader.querySelector('.leader-name').textContent = newLeadername;
-            currentLeader.querySelector('.leader-score').textContent = newLeaderScore;
-            break;
-        }
-    }
 }
 
 
@@ -139,4 +129,43 @@ function untriggerScreenArrowClick(event) {
             document.getElementById(event.code).classList.remove('active-screen-arrow');
             break;
     }
+}
+
+
+function updateLeaderboard() {
+    let leaderboard = document.getElementById('leaderboard');
+    let leadersList = Array.from(leaderboard.querySelectorAll('.leader'));
+    let name = document.getElementById('nameField').value;
+    let score = parseInt(document.getElementById('scoreWindow').textContent);
+
+
+
+    for (let leaderIndex=0; leaderIndex < leadersList.length; leaderIndex++) {
+        let currentLeaderScore = leadersList[leaderIndex].querySelector('.leader-score').textContent;
+
+        if (currentLeaderScore == '--||--' || parseInt(currentLeaderScore) < score) {
+            // moving leaders to insert the new one
+            for (let i=leadersList.length-1; i>leaderIndex; i--) {
+                let previousName = leadersList[i-1].querySelector('.leader-name').textContent;
+                let previousIndex = leadersList[i-1].querySelector('.leader-score').textContent;
+                leadersList[i].querySelector('.leader-name').textContent = previousName;
+                leadersList[i].querySelector('.leader-score').textContent = previousIndex;
+            }
+
+            leadersList[leaderIndex].querySelector('.leader-name').textContent = name;
+            leadersList[leaderIndex].querySelector('.leader-score').textContent = score;
+            break;
+        }
+    }
+}
+
+function changeScore(changing) {
+    let scoreWindow = document.getElementById('scoreWindow');
+    let score = parseInt(scoreWindow.textContent)
+    score += changing;
+    scoreWindow.textContent = score;
+}
+function setScore(score) {
+    let scoreWindow = document.getElementById('scoreWindow');
+    scoreWindow.textContent = score;
 }

@@ -2,6 +2,8 @@ body
 {
     font-family: 'Alegreya', serif;
 
+    overflow: hidden;
+
     height: 100vh;
     margin: 0;
 
@@ -11,6 +13,8 @@ body
 *::after,
 *::before
 {
+    box-sizing: border-box;
+
     cursor: default;
     -webkit-user-select: none;
 
@@ -92,17 +96,17 @@ body
     background-color: #1d1d1d;
 }
 
-.barrier {
-    box-sizing: border-box;
+.barrier
+{
     width: 35px;
     height: 35px;
-    background-color: brown;
+
     border: 1px solid white;
+    background-color: brown;
 }
 
 .snake
 {
-    box-sizing: border-box;
     width: 35px;
     height: 35px;
 
@@ -115,7 +119,6 @@ body
     top: 10px;
     left: 10px;
 
-    box-sizing: border-box;
     width: 15px;
     height: 15px;
 
@@ -129,7 +132,6 @@ body
     top: 5px;
     left: 5px;
 
-    box-sizing: border-box;
     width: 25px;
     height: 25px;
 
@@ -213,23 +215,27 @@ body
 {
     0%
     {
-        -webkit-width: 130%;
                 width: 130%;
+
+        -webkit-width: 130%;
     }100%
     {
-        -webkit-width: 0%;
-                width: 0%;
+                width: 0;
+
+        -webkit-width: 0;
     }
 }@keyframes decrease-to-zero
 {
     0%
     {
-        -webkit-width: 130%;
                 width: 130%;
+
+        -webkit-width: 130%;
     }100%
     {
-        -webkit-width: 0%;
-                width: 0%;
+                width: 0;
+
+        -webkit-width: 0;
     }
 }
 .bonus-point
@@ -243,7 +249,7 @@ body
 
 .leaderboard
 {
-    font-size: 1.5em;
+    font-size: 25px;
 
     position: absolute;
     top: 10px;
@@ -252,7 +258,6 @@ body
     display: flex;
     flex-direction: column;
 
-    box-sizing: border-box;
     width: 200px;
     height: 250px;
     padding: 15px;
@@ -275,7 +280,30 @@ body
 .leaderboard .leader .leader-name,
 .leaderboard .leader .leader-score
 {
+    font-size: 19px;
+
     display: inline-block;
+}
+
+.score-window
+{
+    font-size: 28px;
+    font-weight: bold;
+    line-height: 1.1em;
+
+    position: absolute;
+    top: 410px;
+    right: 25px;
+
+    width: 95px;
+    height: 38px;
+
+    text-align: center;
+
+    color: #9c43c7;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ed4623;
 }
 
 
@@ -372,12 +400,14 @@ body
 
 .start-button
 {
-    font-size: 1.5em;
+    font-size: 24px;
 
     position: absolute;
     top: 410px;
     right: 25px;
 
+    width: 95px;
+    height: 38px;
     padding: 5px 10px;
 
     cursor: pointer;
@@ -402,21 +432,6 @@ body
 .start-button:focus
 {
     outline: none;
-}
-.inactive-start-button
-{
-    color: #a7a7a7;
-    box-shadow: 0 0 10px #a7a7a7;
-}
-.inactive-start-button:hover
-{
-    color: #a7a7a7;
-    box-shadow: 0 0 10px #a7a7a7;
-}
-.inactive-start-button:active
-{
-    color: #a7a7a7;
-    box-shadow: 0 0 10px #a7a7a7;
 }
 
 .snake-cage
@@ -516,6 +531,7 @@ body
 {
     width: 30px;
 }
+
 .settings-container
 {
     position: absolute;
@@ -523,7 +539,7 @@ body
     left: 50%;
 
     width: 400px;
-    height: 250px;
+    height: 300px;
 
     transform: translate(-200px, -125px);
 
@@ -809,4 +825,49 @@ body
     transform: scale(1);
 
     opacity: 0;
+}
+
+
+.settings-container .name-settings-container
+{
+    top: auto;
+    bottom: 10px;
+    left: 10px;
+
+    width: 380px;
+    height: 40px;
+}
+.settings-container .name-settings-title
+{
+    line-height: 30px;
+
+    width: 70px;
+    height: 30px;
+    margin-top: 5px;
+
+    border-right: 1px solid #9c43c7;
+    border-bottom: none;
+}
+.settings-container .name-field
+{
+    font-size: 20px;
+    font-weight: bold;
+
+    position: absolute;
+    top: 5px;
+    left: 90px;
+
+    width: 270px;
+    height: 30px;
+
+    cursor: text;
+    text-align: center;
+
+    border: none;
+    background: none;
+    text-shadow: 0 2px 5px #9c43c7;
+}
+.settings-container .name-field:focus
+{
+    outline: none;
 }

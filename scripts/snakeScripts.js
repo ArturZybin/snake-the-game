@@ -5,6 +5,10 @@ import {
     fieldProperties
 } from './snakeFieldProperties.js';
 
+import {
+    changeScore
+} from './interfaceManager.js';
+
 export {
     createStartingSnake,
     changeMovingDirection,
@@ -188,18 +192,18 @@ function eatNextCell() {
 
     let bonusPoint = document.getElementById('bonusPoint');
     if (bonusPoint && nextCell.contains(bonusPoint)) {
-        let newBodyPartsCount = 3;
-        for (let i = 0; i < newBodyPartsCount; i++) {
-            snakeProperties.newPartsQueueLength++;
-        }
+        changeScore(5);
+        snakeProperties.newPartsQueueLength += 3;
         document.dispatchEvent(new CustomEvent('bonusPointEaten'))
     }
 
     let poisonedPoint = document.getElementById('poisonedPoint');
     if (poisonedPoint && nextCell.contains(poisonedPoint)) {
+        changeScore(-5);
         let removableBodyPartsCount = 3;
         for (let i = 0; i < removableBodyPartsCount; i++) {
             removeBodyPart();
+            changeScore(-10);
         }
         document.dispatchEvent(new CustomEvent('poisonedPointEaten'))
     }
