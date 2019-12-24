@@ -45,7 +45,7 @@ function addBodyPart(rowIndex, cellIndex) {
     let bodyPart = document.createElement('div');
     bodyPart.classList.add('snake');
     bodyPart.classList.add('snake-body');
-    bodyPart.style.background = snakeProperties.color;
+    bodyPart.style.background = snakeProperties.currentColor;
     field.rows[rowIndex].cells[cellIndex].append(bodyPart);
     snakeProperties.snakePartsList.push(bodyPart);
 }

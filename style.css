@@ -92,6 +92,14 @@ body
     background-color: #1d1d1d;
 }
 
+.barrier {
+    box-sizing: border-box;
+    width: 35px;
+    height: 35px;
+    background-color: brown;
+    border: 1px solid white;
+}
+
 .snake
 {
     box-sizing: border-box;

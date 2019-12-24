@@ -10,6 +10,10 @@ export {
 let snakeProperties = {
     color: '#2ecc71',
     speed: 200,
+    // to keep snake properties throughout all game
+    currentColor: '#2ecc71',
+    currentSpeed: 200,
+    
     movingDirection: 'right',
     nextMovingDirection: 'right',
     // includes head and all body parts

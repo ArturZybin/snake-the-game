@@ -7,7 +7,8 @@ import {
 } from './snakeFieldProperties.js';
 
 import {
-    createClearField
+    createClearField,
+    createBarriers
 } from './interfaceCreator.js';
 
 import {
@@ -33,23 +34,27 @@ document.getElementById('settingsButton').addEventListener('click', pauseGame);
 let gameIntervalId;
 
 
-function startGame() {
-    // snake mustn't change color or speed while game
-    document.removeEventListener('settingsClosed', setNewFieldProperties);
-    document.removeEventListener('settingsClosed', setNewSnakeProperties);
 
+function startGame() {
     startButton.classList.add('inactive-start-button');
     startButton.removeEventListener('click', startGame);
 
-    createClearField();
-
     setNewSnakeProperties();
     setNewFieldProperties();
+
+    createClearField();
+    if (fieldProperties.barriers) {
+        createBarriers();
+    }
+
     document.addEventListener('keydown', changeMovingDirection);
     setupScreenArrows();
+    
+    snakeProperties.currentColor = snakeProperties.color;
+    snakeProperties.currentSpeed = snakeProperties.speed;
 
     createStartingSnake();
-    gameIntervalId = setInterval(oneStepAlgorithm, snakeProperties.speed);
+    gameIntervalId = setInterval(oneStepAlgorithm, snakeProperties.currentSpeed);
     startPointsGeneration();
 }
 
@@ -62,7 +67,7 @@ function pauseGame() {
 }
 
 function resumeGame() {
-    gameIntervalId = setInterval(oneStepAlgorithm, snakeProperties.speed);
+    gameIntervalId = setInterval(oneStepAlgorithm, snakeProperties.currentSpeed);
     document.removeEventListener('settingsClosed', resumeGame);
 }
 
@@ -129,6 +134,7 @@ function isLosing() {
             return true;
         }
     }
+    
     if (snake.length == 1) return true;
 
     if (!fieldProperties.passingThroughtWalls) {
@@ -137,6 +143,11 @@ function isLosing() {
         if (!nextHeadCell) {
             return true;
         }
+    }
+    
+    let barriers = document.getElementsByClassName('barrier');
+    for (let barrier of barriers) {
+        if (barrier.closest('td') == nextHeadCell) return true;
     }
 }
 
@@ -153,9 +164,6 @@ function endGame() {
     snakeProperties.snakePartsList = [];
     snakeProperties.movingDirection = 'right';
     snakeProperties.nextMovingDirection = 'right';
-
-    document.addEventListener('settingsClosed', setNewFieldProperties);
-    document.addEventListener('settingsClosed', setNewSnakeProperties);
 
     startButton.classList.remove('inactive-start-button');
     document.getElementById('startButton').addEventListener('click', startGame);

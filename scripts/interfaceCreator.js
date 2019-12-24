@@ -1,7 +1,12 @@
 'use strict'
 
+import {
+    fieldProperties,
+} from './snakeFieldProperties.js';
+
 export {
-    createClearField
+    createClearField,
+    createBarriers
 };
 
 
@@ -33,6 +38,34 @@ function createFieldCells(field) {
     };
 }
 
+
+function createBarriers() {
+    let field = document.getElementById('field');
+    let fieldSize = field.rows.length;
+    let barriersRows = [3, 9, 13];
+    let barrierLength = 10;
+    
+    for (let i=0; i < barriersRows.length; i++) {
+        
+        if (i & 1) {
+            for (let cell = 0; cell < barrierLength; cell++){
+                createBarrierCell(field.rows[ barriersRows[i] ].cells[cell]);
+            }
+        } else {
+            console.log(i)
+            for (let cell = fieldSize-1; cell >= fieldSize - barrierLength; cell--) {
+                createBarrierCell(field.rows[ barriersRows[i] ].cells[cell]);
+            }
+        }
+        
+    }
+}
+
+function createBarrierCell(cell) {
+    let barrier = document.createElement('div');
+    barrier.classList.add('barrier');
+    cell.append(barrier);
+}
 
 function addNewLeader(newLeadername, newLeaderScore) {
     let leaderboard = document.getElementById('leaderboard');
