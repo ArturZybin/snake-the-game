@@ -103,7 +103,7 @@ function removePoisonedPoint() {
 
 function getRandomEmptyCell() {
     let field = document.getElementById('field');
-    for (let i = 0; i < 1000; i++) {
+    for (let i = 0; i < 200; i++) {
         let randomRow = field.rows[Math.floor(Math.random() * (field.rows.length))];
         let randomCell = randomRow.cells[Math.floor(Math.random() * (randomRow.cells.length))];
         if (randomCell.innerHTML == '') return randomCell;

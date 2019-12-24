@@ -20,6 +20,12 @@ let snakeProperties = {
     snakePartsList: [],
     newPartsQueueLength: 0,
 
+    defaultStartingHeadPosition: [8, 9],
+    defaultStartingBodyPartsPositions: [
+        [8, 8],
+        [8, 7],
+        [8, 6],
+    ],
     startingHeadPosition: [8, 9],
     startingBodyPartsPositions: [
         [8, 8],

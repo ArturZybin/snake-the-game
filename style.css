@@ -113,6 +113,10 @@ body
     border: 1px solid white;
 }
 
+.snake-head {
+    background-color: red !important;
+}
+
 .normal-point
 {
     position: absolute;
@@ -382,7 +386,7 @@ body
     outline: none;
 }
 
-.snake-cage
+.caged-snake, .cage
 {
     position: absolute;
     top: 395px;
@@ -391,6 +395,9 @@ body
     width: 70px;
 
     cursor: pointer;
+}
+.dragged-caged-snake{
+    z-index: 50;
 }
 
 .gift

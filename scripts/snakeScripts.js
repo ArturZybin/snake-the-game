@@ -6,8 +6,14 @@ import {
 } from './snakeFieldProperties.js';
 
 import {
-    changeScore
+    changeScore,
+    createClearField,
+    createBarriers
 } from './interfaceManager.js';
+
+import {
+    startGame
+} from './mainGameScript.js';
 
 export {
     createStartingSnake,
@@ -15,7 +21,8 @@ export {
     getNextHeadCell,
     eatNextCell,
     moveSnake,
-    addBodyPart
+    addBodyPart,
+    startSnakeDragging
 };
 
 
@@ -40,7 +47,7 @@ function createStartingSnake() {
 
 function addBodyPart(rowIndex, cellIndex) {
     // finding coordinates if they haven't been given
-    if (!rowIndex) {
+    if (typeof rowIndex == 'undefined') {
         let newBodyPartCoords = getNewBodyPartCoords();
         rowIndex = newBodyPartCoords[0];
         cellIndex = newBodyPartCoords[1];
@@ -66,6 +73,11 @@ function removeBodyPart() {
         return;
     }
     snake.pop().remove();
+}
+
+function removeSnake() {
+    snakeProperties.snakePartsList.forEach( part => part.remove() );
+    snakeProperties.snakePartsList = []
 }
 
 function moveSnake() {
@@ -206,5 +218,138 @@ function eatNextCell() {
             changeScore(-10);
         }
         document.dispatchEvent(new CustomEvent('poisonedPointEaten'))
+    }
+}
+
+
+
+function startSnakeDragging(event) {
+    let snake = document.getElementById('cagedSnake');
+    if (snake.hasAttribute('hidden')) return;
+
+    createClearField();
+    if (fieldProperties.barriers) {
+        createBarriers();
+    }
+
+    snake.classList.add('dragged-caged-snake');
+
+    let snakeRect = snake.getBoundingClientRect();
+    let snakeShiftX = event.clientX - snakeRect.left;
+    let snakeShiftY = event.clientY - snakeRect.top;
+
+    document.addEventListener('mousemove', moveDraggingSnake);
+    document.addEventListener('mousemove', showStartingSnake);
+
+    document.addEventListener('mouseup', endSnakeDragging);
+
+
+    function moveDraggingSnake(event) {
+        let container = document.getElementById('mainContainer');
+        let containerRect = container.getBoundingClientRect();
+        let containerShiftX = containerRect.left;
+        let containerShiftY = containerRect.top;
+
+        let snake = document.getElementById('cagedSnake');
+        let snakeRect = snake.getBoundingClientRect();
+        let left = event.clientX - snakeShiftX;
+        let top = event.clientY - snakeShiftY;
+
+        if (left < containerRect.left) left = containerRect.left;
+        if (left > containerRect.right - snakeRect.width) left = containerRect.right - snakeRect.width;
+        if (top < containerRect.top) top = containerRect.top;
+        if (top > containerRect.bottom - snakeRect.height) top = containerRect.bottom - snakeRect.height;
+
+        snake.style.left = left - containerShiftX + 'px';
+        snake.style.top = top - containerShiftY + 'px';
+    }
+
+    function showStartingSnake(event) {
+        snake.hidden = true;
+        let elementBelowCursor = document.elementFromPoint(event.clientX, event.clientY);
+        snake.removeAttribute('hidden');
+
+        if (!elementBelowCursor.classList.contains('field-cell') && !elementBelowCursor.classList.contains('snake')) return;
+        elementBelowCursor = elementBelowCursor.closest('td');
+
+        if (setNewStartingSnakePosition(elementBelowCursor)) {
+            createStartingSnake();
+            elementBelowCursor.addEventListener('mouseout', removeSnake);
+        }
+    }
+
+    function endSnakeDragging(event) {
+        removeSnake();
+        document.removeEventListener('mousemove', moveDraggingSnake);
+        document.removeEventListener('mousemove', showStartingSnake);
+        document.removeEventListener('mouseup', endSnakeDragging);
+
+        let snake = document.getElementById('cagedSnake');
+
+        snake.hidden = true;
+        let elementBelowCursor = document.elementFromPoint(event.clientX, event.clientY)
+
+        snake.removeAttribute('style');
+        snake.classList.remove('dragged-caged-snake');
+
+        if (!elementBelowCursor.classList.contains('field-cell')) {
+            snake.removeAttribute('hidden');
+            return;
+        }
+
+        if ( !setNewStartingSnakePosition(elementBelowCursor) ) {
+            snake.removeAttribute('hidden');
+            return;
+        }
+
+        startGame();
+
+        // reset starting positions and direction to default
+        snakeProperties.startingHeadPosition = snakeProperties.defaultStartingHeadPosition;
+        snakeProperties.startingBodyPartsPositions = snakeProperties.defaultStartingBodyPartsPositions;
+    }
+
+    // returns false if the cell isn't suits for spawning snake
+    function setNewStartingSnakePosition(cell) {
+        let field = document.getElementById('field');
+        let rowIndex = cell.closest('tr').rowIndex;
+        let headCellIndex = cell.cellIndex;
+
+        snakeProperties.startingHeadPosition = [rowIndex, headCellIndex];
+        if (headCellIndex > 3) {
+            snakeProperties.startingBodyPartsPositions = [
+                [rowIndex, headCellIndex-1],
+                [rowIndex, headCellIndex-2],
+                [rowIndex, headCellIndex-3],
+            ]
+            snakeProperties.movingDirection = 'right';
+            snakeProperties.nextMovingDirection = 'right';
+        } else {
+            snakeProperties.startingBodyPartsPositions = [
+                [rowIndex, headCellIndex+1],
+                [rowIndex, headCellIndex+2],
+                [rowIndex, headCellIndex+3],
+            ]
+            snakeProperties.movingDirection = 'left';
+            snakeProperties.nextMovingDirection = 'left';
+        }
+        createStartingSnake();
+
+        for (let snakePart of snakeProperties.snakePartsList) {
+            if ( !(typeof snakePart.closest('td').childNodes[1] == 'undefined')) { 
+
+                if (!snakePart.closest('td').childNodes[0].classList.contains('snake')) {
+                    // reset starting positions and direction to default
+                    snakeProperties.startingHeadPosition = snakeProperties.defaultStartingHeadPosition;
+                    snakeProperties.startingBodyPartsPositions = snakeProperties.defaultStartingBodyPartsPositions;
+
+                    removeSnake();
+                    return false;
+                }
+
+            }
+        }
+        removeSnake();
+        return true;
     }
 }

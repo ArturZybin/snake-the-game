@@ -58,7 +58,6 @@ function createBarriers() {
                 createBarrierCell(field.rows[ barriersRows[i] ].cells[cell]);
             }
         } else {
-            console.log(i)
             for (let cell = fieldSize-1; cell >= fieldSize - barrierLength; cell--) {
                 createBarrierCell(field.rows[ barriersRows[i] ].cells[cell]);
             }

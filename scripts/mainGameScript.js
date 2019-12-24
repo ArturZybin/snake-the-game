@@ -25,20 +25,28 @@ import {
     getNextHeadCell,
     eatNextCell,
     moveSnake,
-    addBodyPart
+    addBodyPart,
+    startSnakeDragging
 } from './snakeScripts.js';
 
+export {
+    startGame
+}
 
 document.addEventListener('settingsClosed', setNewFieldProperties);
 document.addEventListener('settingsClosed', setNewSnakeProperties);
 document.getElementById('startButton').addEventListener('click', startGame);
 document.getElementById('settingsButton').addEventListener('click', pauseGame);
 
+document.getElementById('cage').addEventListener('mousedown', startSnakeDragging)
+
 let gameIntervalId;
 
 
 
 function startGame() {
+    document.getElementById('cagedSnake').hidden = 'true';
+
     startButton.hidden = 'true';
     scoreWindow.removeAttribute('hidden');
 
@@ -160,6 +168,8 @@ function isLosing() {
 
 function endGame() {
     updateLeaderboard();
+
+    document.getElementById('cagedSnake').removeAttribute('hidden');
 
     document.removeEventListener('keydown', changeMovingDirection);
     disableScreenArrows();
