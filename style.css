@@ -911,6 +911,13 @@ body
         top: 760px;
         left: 500px;
     }
+    .close-settings-button{
+        left: 395px;
+        top: -35px;
+    }
+    .message{
+        left: 10px;
+    }
 }
 @media screen and (orientation: portrait) and  (max-height: 1000px){
     body{
