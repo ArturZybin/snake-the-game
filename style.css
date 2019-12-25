@@ -870,3 +870,50 @@ body
         -moz-transform-origin: 0 0;
     }
 }
+@media (orientation: portrait){
+    body{
+        zoom: 1.5;
+    }
+    .container{
+        transform: none;
+        top: auto;
+        bottom: 0px;
+        left: 10px;
+        height: 885px;
+        width: 620px;
+    }
+    .leaderboard{
+        left: 10px;
+        top: 625px;
+    }
+    .arrows-container{
+        zoom: 1.3;
+        top: 500px;
+        left: 200px;
+    }
+    .cage, .caged-snake{
+        top: 625px;
+        left: 520px;
+    }
+    .start-button{
+        top: 820px;
+        left: 230px;
+    }
+    .score-window{
+        top: 820px;
+        left: 230px;
+    }
+    .settings-button {
+        top: 800px;
+        left: 380px;
+    }
+    .gift{
+        top: 760px;
+        left: 500px;
+    }
+}
+@media screen and (orientation: portrait) and  (max-height: 1000px){
+    body{
+        zoom: 1;
+    }
+}
