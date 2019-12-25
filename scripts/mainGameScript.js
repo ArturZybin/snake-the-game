@@ -39,6 +39,7 @@ document.getElementById('startButton').addEventListener('click', startGame);
 document.getElementById('settingsButton').addEventListener('click', pauseGame);
 
 document.getElementById('cage').addEventListener('mousedown', startSnakeDragging);
+document.getElementById('cage').addEventListener('touchstart', startSnakeDragging);
 
 let gameIntervalId;
 
@@ -110,13 +111,9 @@ function oneStepAlgorithm(intervalId) {
 function setupScreenArrows() {
     let arrowsList = Array.from(document.getElementsByClassName('arrow'));
     arrowsList.forEach(arrow => {
-        // trigger keydown with event.code of appropriate keyboard arrow
-        // to use the same function for changing direction
-        let arrowEvent = new Event('keydown', {
-            bubbles: true,
-        });
-        arrowEvent.code = arrow.id;
-        arrow.onclick = () => document.dispatchEvent(arrowEvent);
+        // transfer object with the fake key arrow code
+        // to the change-direction function
+        arrow.onclick = () => changeMovingDirection({'code': arrow.id});
     })
 }
 
@@ -124,7 +121,7 @@ function setupScreenArrows() {
 function disableScreenArrows() {
     let arrowsList = Array.from(document.getElementsByClassName('arrow'));
     arrowsList.forEach(arrow => {
-        arrow.closest('div').onclick = null;
+        arrow.onclick = null;
     })
 }
 

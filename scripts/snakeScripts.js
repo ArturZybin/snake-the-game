@@ -239,6 +239,10 @@ function startSnakeDragging(event) {
 
     snake.classList.add('dragged-caged-snake');
 
+    if (event.changedTouches) {
+        event = event.changedTouches[0];
+    }
+
     let snakeRect = snake.getBoundingClientRect();
     let snakeShiftX = event.clientX/zoom - snakeRect.left;
     let snakeShiftY = event.clientY/zoom - snakeRect.top;
@@ -247,12 +251,20 @@ function startSnakeDragging(event) {
     document.addEventListener('mousemove', showStartingSnake);
     document.addEventListener('mouseup', endSnakeDragging);
 
+    document.addEventListener('touchmove', moveDraggingSnake);
+    document.addEventListener('touchmove', showStartingSnake);
+    document.addEventListener('touchend', endSnakeDragging);
+
 
     function moveDraggingSnake(event) {
         let container = document.getElementById('mainContainer');
         let containerRect = container.getBoundingClientRect();
         let containerShiftX = containerRect.left;
         let containerShiftY = containerRect.top;
+
+        if (event.changedTouches) {
+            event = event.changedTouches[0];
+        }
 
         let snake = document.getElementById('cagedSnake');
         let snakeRect = snake.getBoundingClientRect();
@@ -269,6 +281,10 @@ function startSnakeDragging(event) {
     }
 
     function showStartingSnake(event) {
+        if (event.changedTouches) {
+            event = event.changedTouches[0];
+        }
+
         snake.hidden = true;
         let elementBelowCursor = document.elementFromPoint(event.clientX, event.clientY);
         snake.removeAttribute('hidden');
@@ -288,10 +304,13 @@ function startSnakeDragging(event) {
         document.removeEventListener('mousemove', showStartingSnake);
         document.removeEventListener('mouseup', endSnakeDragging);
 
+        if (event.changedTouches) {
+            event = event.changedTouches[0];
+        }
+
         let snake = document.getElementById('cagedSnake');
 
         snake.hidden = true;
-        console.log(event.clientX, event.clientY)
         let elementBelowCursor = document.elementFromPoint(event.clientX, event.clientY)
 
         snake.removeAttribute('style');
