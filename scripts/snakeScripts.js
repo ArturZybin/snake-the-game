@@ -245,7 +245,6 @@ function startSnakeDragging(event) {
 
     document.addEventListener('mousemove', moveDraggingSnake);
     document.addEventListener('mousemove', showStartingSnake);
-
     document.addEventListener('mouseup', endSnakeDragging);
 
 
@@ -292,6 +291,7 @@ function startSnakeDragging(event) {
         let snake = document.getElementById('cagedSnake');
 
         snake.hidden = true;
+        console.log(event.clientX, event.clientY)
         let elementBelowCursor = document.elementFromPoint(event.clientX, event.clientY)
 
         snake.removeAttribute('style');

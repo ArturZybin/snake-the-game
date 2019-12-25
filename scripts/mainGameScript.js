@@ -38,7 +38,7 @@ document.addEventListener('settingsClosed', setNewSnakeProperties);
 document.getElementById('startButton').addEventListener('click', startGame);
 document.getElementById('settingsButton').addEventListener('click', pauseGame);
 
-document.getElementById('cage').addEventListener('mousedown', startSnakeDragging)
+document.getElementById('cage').addEventListener('mousedown', startSnakeDragging);
 
 let gameIntervalId;
 
