@@ -304,6 +304,10 @@ function startSnakeDragging(event) {
         document.removeEventListener('mousemove', showStartingSnake);
         document.removeEventListener('mouseup', endSnakeDragging);
 
+        document.removeEventListener('touchmove', moveDraggingSnake);
+        document.removeEventListener('touchmove', showStartingSnake);
+        document.removeEventListener('touchend', endSnakeDragging);
+
         if (event.changedTouches) {
             event = event.changedTouches[0];
         }

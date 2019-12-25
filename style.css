@@ -907,10 +907,10 @@ body
     }
     .arrows-container
     {
-        top: 500px;
-        left: 200px;
+        top: 420px;
+        left: 170px;
 
-        zoom: 1.3;
+        zoom: 1.5;
     }
     .cage,
     .caged-snake
