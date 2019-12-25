@@ -329,11 +329,15 @@ function startSnakeDragging(event) {
         let elementBelowCursor = document.elementFromPoint(event.clientX, event.clientY);
         snake.removeAttribute('hidden');
 
-        if (!elementBelowCursor.classList.contains('field-cell') && !elementBelowCursor.classList.contains('snake')) return;
+        if (!elementBelowCursor.classList.contains('field-cell') && !elementBelowCursor.classList.contains('snake')) {
+            removeSnake();
+            return;
+        }
         let cellBelowCursor = elementBelowCursor.closest('td');
 
         if (setNewStartingSnakePosition(cellBelowCursor)) {
             createStartingSnake();
+            drawSnakeBorder();
             cellBelowCursor.addEventListener('mouseout', removeSnake);
         }
     }

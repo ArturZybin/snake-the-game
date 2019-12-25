@@ -66,6 +66,7 @@ function startGame() {
     setupScreenArrows();
 
     createStartingSnake();
+    drawSnakeBorder();
     gameIntervalId = setInterval(oneStepAlgorithm, snakeProperties.currentSpeed);
     startPointsGeneration();
 }
