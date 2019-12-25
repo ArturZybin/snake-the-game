@@ -22,7 +22,8 @@ export {
     eatNextCell,
     moveSnake,
     addBodyPart,
-    startSnakeDragging
+    startSnakeDragging,
+    drawSnakeBorder
 };
 
 
@@ -48,9 +49,9 @@ function createStartingSnake() {
 }
 
 
-function addBodyPart(rowIndex, cellIndex) {
+function addBodyPart(rowIndex, cellIndex, animateBodyPart) {
     // finding coordinates if they haven't been given
-    if (typeof rowIndex == 'undefined') {
+    if (!rowIndex && rowIndex !== 0) {
         let newBodyPartCoords = getNewBodyPartCoords();
         rowIndex = newBodyPartCoords[0];
         cellIndex = newBodyPartCoords[1];
@@ -62,6 +63,11 @@ function addBodyPart(rowIndex, cellIndex) {
     bodyPart.style.background = snakeProperties.currentColor;
     field.rows[rowIndex].cells[cellIndex].append(bodyPart);
     snakeProperties.snakePartsList.push(bodyPart);
+
+    if (animateBodyPart) {
+        bodyPart.classList.add('new-snake-part');
+        setTimeout(() => bodyPart.classList.remove('new-snake-part'), 300);
+    }
 }
 function getNewBodyPartCoords() {
     let lastBodyPart = snakeProperties.snakePartsList[snakeProperties.snakePartsList.length - 1];
@@ -106,6 +112,40 @@ function moveSnake() {
     }
 }
 
+function drawSnakeBorder() {
+    let field = document.getElementById('field');
+    let fieldSize = field.rows.length;
+    let snake = snakeProperties.snakePartsList;
+
+    snake.push('fake body part');
+
+    // checking every side of every body part
+    for (let i = 1; i < snake.length-1; i++) {
+        snake[i].removeAttribute('style');
+        snake[i].style.background = snakeProperties.currentColor;
+
+        let rowIndex = snake[i].closest('tr').rowIndex;
+        let cellIndex = snake[i].closest('td').cellIndex
+        if( rowIndex == 0 || ( !(field.rows[rowIndex-1].cells[cellIndex].firstChild == snake[i+1]) && !(field.rows[rowIndex-1].cells[cellIndex].firstChild == snake[i-1]) ) ) {
+            snake[i].style.borderTopWidth = '2px';
+            snake[i].style.borderTopColor = '#51381F';
+        }
+        if( rowIndex == fieldSize-1 || ( !(field.rows[rowIndex+1].cells[cellIndex].firstChild == snake[i+1]) && !(field.rows[rowIndex+1].cells[cellIndex].firstChild == snake[i-1]) ) ) {
+            snake[i].style.borderBottomWidth = '2px';
+            snake[i].style.borderBottomColor = '#51381F';
+        }
+        if( cellIndex == 0 || ( !(field.rows[rowIndex].cells[cellIndex-1].firstChild == snake[i+1]) && !(field.rows[rowIndex].cells[cellIndex-1].firstChild == snake[i-1]) ) ) {
+            snake[i].style.borderLeftWidth = '2px';
+            snake[i].style.borderLeftColor = '#51381F';
+        }
+        if( cellIndex == fieldSize-1 || ( !(field.rows[rowIndex].cells[cellIndex+1].firstChild == snake[i+1]) && !(field.rows[rowIndex].cells[cellIndex+1].firstChild == snake[i-1]) ) ) {
+            snake[i].style.borderRightWidth = '2px';
+            snake[i].style.borderRightColor = '#51381F';
+        }
+    }
+
+    snake.pop();
+}
 
 // can return undefined (cell with coordinated out of field)
 // if option 'passing throught walls' is off
@@ -259,8 +299,8 @@ function startSnakeDragging(event) {
     function moveDraggingSnake(event) {
         let container = document.getElementById('mainContainer');
         let containerRect = container.getBoundingClientRect();
-        let containerShiftX = containerRect.left;
-        let containerShiftY = containerRect.top;
+        let containerLeft = containerRect.left;
+        let containerTop = containerRect.top;
 
         if (event.changedTouches) {
             event = event.changedTouches[0];
@@ -276,8 +316,8 @@ function startSnakeDragging(event) {
         if (top < containerRect.top) top = containerRect.top;
         if (top > containerRect.bottom - snakeRect.height) top = containerRect.bottom - snakeRect.height;
 
-        snake.style.left = left - containerShiftX + 'px';
-        snake.style.top = top - containerShiftY + 'px';
+        snake.style.left = left - containerLeft + 'px';
+        snake.style.top = top - containerTop + 'px';
     }
 
     function showStartingSnake(event) {
@@ -290,11 +330,11 @@ function startSnakeDragging(event) {
         snake.removeAttribute('hidden');
 
         if (!elementBelowCursor.classList.contains('field-cell') && !elementBelowCursor.classList.contains('snake')) return;
-        elementBelowCursor = elementBelowCursor.closest('td');
+        let cellBelowCursor = elementBelowCursor.closest('td');
 
-        if (setNewStartingSnakePosition(elementBelowCursor)) {
+        if (setNewStartingSnakePosition(cellBelowCursor)) {
             createStartingSnake();
-            elementBelowCursor.addEventListener('mouseout', removeSnake);
+            cellBelowCursor.addEventListener('mouseout', removeSnake);
         }
     }
 
@@ -343,6 +383,8 @@ function startSnakeDragging(event) {
         let rowIndex = cell.closest('tr').rowIndex;
         let headCellIndex = cell.cellIndex;
 
+        // creating starting snake on given cell
+        // turn it back if it doesn't fit to the field
         snakeProperties.startingHeadPosition = [rowIndex, headCellIndex];
         if (headCellIndex > 3) {
             snakeProperties.startingBodyPartsPositions = [
@@ -363,6 +405,7 @@ function startSnakeDragging(event) {
         }
         createStartingSnake();
 
+        // checking if snake occupies cell which has already been occupied
         for (let snakePart of snakeProperties.snakePartsList) {
             if ( !(typeof snakePart.closest('td').childNodes[1] == 'undefined')) { 
 

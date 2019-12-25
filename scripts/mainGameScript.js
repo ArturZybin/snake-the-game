@@ -26,7 +26,8 @@ import {
     eatNextCell,
     moveSnake,
     addBodyPart,
-    startSnakeDragging
+    startSnakeDragging,
+    drawSnakeBorder
 } from './snakeScripts.js';
 
 export {
@@ -98,13 +99,14 @@ function oneStepAlgorithm(intervalId) {
     }
 
     if (snakeProperties.newPartsQueueLength) {
-        addBodyPart();
+        addBodyPart(null, null, true);
         changeScore(10);
         snakeProperties.newPartsQueueLength--;
     }
 
     eatNextCell();
     moveSnake();
+    drawSnakeBorder();
 }
 
 

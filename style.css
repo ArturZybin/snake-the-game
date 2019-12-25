@@ -14,6 +14,7 @@ body
 *::before
 {
     box-sizing: border-box;
+    -webkit-tap-highlight-color:  rgba(255, 255, 255, 0); 
 
     cursor: default;
     -webkit-user-select: none;
@@ -67,6 +68,7 @@ body
     position: absolute;
     top: 10px;
     left: 10px;
+    font-size: 0;
 
     box-sizing: padding-box;
     width: 600px;
@@ -80,7 +82,7 @@ body
 .field .field-cell
 {
     line-height: 0;
-
+    font-size: 0;
     position: relative;
 
     overflow: hidden;
@@ -97,6 +99,7 @@ body
     background-color: #1d1d1d;
 }
 
+
 .barrier
 {
     width: 35px;
@@ -112,6 +115,21 @@ body
     height: 35px;
 
     border: 1px solid white;
+}
+.new-snake-part {
+    border: 5px solid #1d1d1d;
+    animation: blink-1 0.5s both;
+}
+@keyframes blink-1 {
+  0%,
+  50%,
+  100% {
+    opacity: 1;
+  }
+  25%,
+  75% {
+    opacity: 0;
+  }
 }
 
 .snake-head
@@ -907,16 +925,16 @@ body
     }
     .arrows-container
     {
-        top: 420px;
-        left: 170px;
+        top: 330px;
+        left: 130px;
 
-        zoom: 1.5;
+        zoom: 1.9;
     }
     .cage,
     .caged-snake
     {
         top: 625px;
-        left: 520px;
+        left: 540px;
     }
     .start-button
     {
@@ -931,12 +949,12 @@ body
     .settings-button
     {
         top: 800px;
-        left: 380px;
+        left: 420px;
     }
     .gift
     {
         top: 760px;
-        left: 500px;
+        left: 520px;
     }
     .close-settings-button
     {
