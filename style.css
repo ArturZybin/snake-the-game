@@ -852,3 +852,21 @@ body
         text-shadow: 0 1px 0 #686868, 0 2px 0 #686868, 0 3px 0 #686868, 0 4px 0 #686868, 0 5px 0 #686868, 0 6px 0 #686868, 0 7px 0 #686868, 0 8px 0 #686868, 0 9px 0 #686868, 30px 30px 50px #9c43c7;
     }
 }
+
+
+
+
+@media screen and (max-width: 900px), screen and (max-height: 650px){
+    body{
+        zoom: 0.7; 
+        -moz-transform: scale(0.7); 
+        -moz-transform-origin: 0 0;
+    }
+}
+@media screen and (min-width: 2500px), screen and (max-height: 650px){
+    body{
+        zoom: 1.5;
+        -moz-transform: scale(1.5); 
+        -moz-transform-origin: 0 0;
+    }
+}

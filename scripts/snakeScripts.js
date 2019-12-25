@@ -29,6 +29,9 @@ export {
 function createStartingSnake() {
     let field = document.getElementById('field');
 
+    snakeProperties.currentColor = snakeProperties.color;
+    snakeProperties.currentSpeed = snakeProperties.speed;
+
     let snakeHead = document.createElement('div');
     snakeHead.id = 'snakeHead';
     snakeHead.classList.add('snake');
@@ -224,6 +227,8 @@ function eatNextCell() {
 
 
 function startSnakeDragging(event) {
+    let zoom = getComputedStyle(document.body).zoom;
+
     let snake = document.getElementById('cagedSnake');
     if (snake.hasAttribute('hidden')) return;
 
@@ -235,8 +240,8 @@ function startSnakeDragging(event) {
     snake.classList.add('dragged-caged-snake');
 
     let snakeRect = snake.getBoundingClientRect();
-    let snakeShiftX = event.clientX - snakeRect.left;
-    let snakeShiftY = event.clientY - snakeRect.top;
+    let snakeShiftX = event.clientX/zoom - snakeRect.left;
+    let snakeShiftY = event.clientY/zoom - snakeRect.top;
 
     document.addEventListener('mousemove', moveDraggingSnake);
     document.addEventListener('mousemove', showStartingSnake);
@@ -252,8 +257,8 @@ function startSnakeDragging(event) {
 
         let snake = document.getElementById('cagedSnake');
         let snakeRect = snake.getBoundingClientRect();
-        let left = event.clientX - snakeShiftX;
-        let top = event.clientY - snakeShiftY;
+        let left = event.clientX/zoom - snakeShiftX;
+        let top = event.clientY/zoom - snakeShiftY;
 
         if (left < containerRect.left) left = containerRect.left;
         if (left > containerRect.right - snakeRect.width) left = containerRect.right - snakeRect.width;

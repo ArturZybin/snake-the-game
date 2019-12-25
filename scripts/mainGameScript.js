@@ -62,9 +62,6 @@ function startGame() {
 
     document.addEventListener('keydown', changeMovingDirection);
     setupScreenArrows();
-    
-    snakeProperties.currentColor = snakeProperties.color;
-    snakeProperties.currentSpeed = snakeProperties.speed;
 
     createStartingSnake();
     gameIntervalId = setInterval(oneStepAlgorithm, snakeProperties.currentSpeed);
