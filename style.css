@@ -863,7 +863,7 @@ body
         -moz-transform-origin: 0 0;
     }
 }
-@media screen and (min-width: 2500px), screen and (max-height: 650px){
+@media screen and (min-width: 2500px), screen and (min-height: 2000px){
     body{
         zoom: 1.5;
         -moz-transform: scale(1.5); 
