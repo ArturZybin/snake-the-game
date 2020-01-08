@@ -63,7 +63,7 @@ function startGame() {
     }
 
     document.addEventListener('keydown', changeMovingDirection);
-    setupScreenArrows();
+    enableScreenArrows();
 
     createStartingSnake();
     drawSnakeBorder();
@@ -99,7 +99,7 @@ function oneStepAlgorithm(intervalId) {
         return;
     }
 
-    if (snakeProperties.newPartsQueueLength) {
+    if (snakeProperties.newPartsQueueLength > 0) {
         addBodyPart(null, null, true);
         changeScore(10);
         snakeProperties.newPartsQueueLength--;
@@ -111,7 +111,7 @@ function oneStepAlgorithm(intervalId) {
 }
 
 
-function setupScreenArrows() {
+function enableScreenArrows() {
     let arrowsList = Array.from(document.getElementsByClassName('arrow'));
     arrowsList.forEach(arrow => {
         // transfer object with the fake key arrow code
@@ -148,13 +148,7 @@ function isLosing() {
     
     if (snake.length == 1) return true;
 
-    if (!fieldProperties.passingThroughtWalls) {
-        let fieldSize = document.getElementById('field').rows.length;
-
-        if (!nextHeadCell) {
-            return true;
-        }
-    }
+    if (!nextHeadCell) return true;
     
     let barriers = document.getElementsByClassName('barrier');
     for (let barrier of barriers) {
