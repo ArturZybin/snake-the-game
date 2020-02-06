@@ -5,7 +5,7 @@ import {
 } from './snakeFieldProperties.js';
 
 export {
-    createClearField,
+    createNewField,
     createBarriers,
     changeScore,
     setScore,
@@ -13,7 +13,8 @@ export {
 };
 
 
-createClearField();
+createNewField();
+setupSavedLeaderboard();
 
 
 document.getElementById('settingsButton').addEventListener('click', openSettings);
@@ -23,7 +24,7 @@ document.addEventListener('keyup', untriggerScreenArrowClick);
 document.getElementById('gift').addEventListener('click', takeGift);
 
 
-function createClearField() {
+function createNewField() {
     let field = document.getElementById('field');
     field.innerHTML = '';
     createFieldCells(field);
@@ -132,13 +133,12 @@ function untriggerScreenArrowClick(event) {
 }
 
 
+// take name from settings and score from score field
 function updateLeaderboard() {
     let leaderboard = document.getElementById('leaderboard');
     let leadersList = Array.from(leaderboard.querySelectorAll('.leader'));
     let name = document.getElementById('nameField').value;
     let score = parseInt(document.getElementById('scoreWindow').textContent);
-
-
 
     for (let leaderIndex=0; leaderIndex < leadersList.length; leaderIndex++) {
         let currentLeaderScore = leadersList[leaderIndex].querySelector('.leader-score').textContent;
@@ -157,7 +157,36 @@ function updateLeaderboard() {
             break;
         }
     }
+    
+    saveLeaderboard();
 }
+
+
+function saveLeaderboard() {
+    let leaderboard = document.getElementById('leaderboard');
+    let leadersList = Array.from(leaderboard.querySelectorAll('.leader'));
+    
+    let leadersJSON = [];
+    for (let leader of leadersList) {
+        let name = leader.querySelector('.leader-name').textContent;
+        let score = leader.querySelector('.leader-score').textContent;
+        leadersJSON.push([name, score]);
+    }
+    
+    localStorage.setItem('leaders', JSON.stringify(leadersJSON));
+}
+
+function setupSavedLeaderboard() {
+    let leaderboard = document.getElementById('leaderboard');
+    let leadersList = Array.from(leaderboard.querySelectorAll('.leader'));
+    
+    let leadersJSON = JSON.parse(localStorage.getItem('leaders'));
+    for (let index = 0; index < leadersJSON.length; index++) {
+        leadersList[index].querySelector('.leader-name').textContent = leadersJSON[index][0];
+        leadersList[index].querySelector('.leader-score').textContent = leadersJSON[index][1];
+    }
+}
+
 
 function changeScore(changing) {
     let scoreWindow = document.getElementById('scoreWindow');
@@ -169,6 +198,8 @@ function setScore(score) {
     let scoreWindow = document.getElementById('scoreWindow');
     scoreWindow.textContent = score;
 }
+
+
 
 function takeGift() {
     let giftBox = document.getElementById('gift');

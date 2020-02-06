@@ -7,7 +7,7 @@ import {
 
 import {
     changeScore,
-    createClearField,
+    createNewField,
     createBarriers
 } from './interfaceManager.js';
 
@@ -272,7 +272,7 @@ function startSnakeDragging(event) {
     let snake = document.getElementById('cagedSnake');
     if (snake.hasAttribute('hidden')) return;
 
-    createClearField();
+    createNewField();
     if (fieldProperties.barriers) {
         createBarriers();
     }

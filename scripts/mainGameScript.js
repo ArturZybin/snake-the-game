@@ -7,7 +7,7 @@ import {
 } from './snakeFieldProperties.js';
 
 import {
-    createClearField,
+    createNewField,
     createBarriers,
     changeScore,
     setScore,
@@ -57,7 +57,7 @@ function startGame() {
 
     setScore(40);
 
-    createClearField();
+    createNewField();
     if (fieldProperties.barriers) {
         createBarriers();
     }
