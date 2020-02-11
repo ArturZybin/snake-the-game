@@ -181,6 +181,7 @@ function setupSavedLeaderboard() {
     let leadersList = Array.from(leaderboard.querySelectorAll('.leader'));
     
     let leadersJSON = JSON.parse(localStorage.getItem('leaders'));
+    if (!leadersJSON) return;
     for (let index = 0; index < leadersJSON.length; index++) {
         leadersList[index].querySelector('.leader-name').textContent = leadersJSON[index][0];
         leadersList[index].querySelector('.leader-score').textContent = leadersJSON[index][1];
