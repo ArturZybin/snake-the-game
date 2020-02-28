@@ -1,5 +1,5 @@
 'use strict'
-import '../style.css';
+import '../scss/style.scss';
 
 import {
     snakeProperties,

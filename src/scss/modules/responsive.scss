@@ -1,0 +1,80 @@
+@media screen and (max-width: 900px), screen and (max-height: 650px) {
+   body {
+       zoom: .7;
+
+       -moz-transform: scale(.7);
+       -moz-transform-origin: 0 0;
+   }
+}
+
+
+@media screen and (min-width: 2500px), screen and (min-height: 2000px) {
+   body {
+       zoom: 1.5;
+
+       -moz-transform: scale(1.5);
+       -moz-transform-origin: 0 0;
+   }
+}
+
+
+@media (orientation: portrait) {
+   body {
+       zoom: 1.5;
+   }
+   .container {
+       top: auto;
+       bottom: 0;
+       left: 10px;
+
+       width: 620px;
+       height: 885px;
+
+       transform: none;
+   }
+   .leaderboard {
+       top: 625px;
+       left: 10px;
+   }
+   .arrows-container {
+       top: 330px;
+       left: 130px;
+
+       zoom: 1.9;
+   }
+   .cage,
+   .caged-snake {
+       top: 625px;
+       left: 540px;
+   }
+   .start-button {
+       top: 820px;
+       left: 230px;
+   }
+   .score-window {
+       top: 820px;
+       left: 230px;
+   }
+   .settings-button {
+       top: 800px;
+       left: 420px;
+   }
+   .gift {
+       top: 760px;
+       left: 520px;
+   }
+   .close-settings-button {
+       top: -35px;
+       left: 395px;
+   }
+   .message {
+       left: 10px;
+   }
+}
+
+
+@media screen and (orientation: portrait) and  (max-height: 1000px) {
+   body {
+       zoom: 1;
+   }
+}

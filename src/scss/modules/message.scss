@@ -1,0 +1,40 @@
+.message {
+   font-size: 250px;
+   line-height: 280px;
+
+   position: absolute;
+   z-index: 100;
+   top: 150px;
+   left: 150px;
+
+   width: 600px;
+   height: 280px;
+
+   text-align: center;
+   text-transform: uppercase;
+}
+
+.win-message {
+   color: #6ec743;
+}
+.lose-message {
+   color: #9e0303;
+}
+
+.animate-message {
+   animation: text-pop-up-top .4s cubic-bezier(.250, .460, .450, .940) both;
+}
+@keyframes text-pop-up-top {
+   0% {
+       transform: translateY(0);
+       transform-origin: 50% 50%;
+
+       text-shadow: none;
+   }
+   100% {
+       transform: translateY(-50px);
+       transform-origin: 50% 50%;
+
+       text-shadow: 0 1px 0 #686868, 0 2px 0 #686868, 0 3px 0 #686868, 0 4px 0 #686868, 0 5px 0 #686868, 0 6px 0 #686868, 0 7px 0 #686868, 0 8px 0 #686868, 0 9px 0 #686868, 30px 30px 50px #9c43c7;
+   }
+}

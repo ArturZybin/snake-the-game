@@ -1,0 +1,27 @@
+.snake {
+   width: 35px;
+   height: 35px;
+
+   border: 1px solid white;
+
+   &-head {
+      background-color: red !important;
+   }
+}
+
+.new-snake-part {
+   animation: blink-1 .5s both;
+
+   border: 5px solid #1d1d1d;
+}
+@keyframes blink-1 {
+   0%,
+   50%,
+   100% {
+       opacity: 1;
+   }
+   25%,
+   75% {
+       opacity: 0;
+   }
+}

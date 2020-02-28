@@ -137,7 +137,7 @@ function untriggerScreenArrowClick(event) {
 function updateLeaderboard() {
     let leaderboard = document.getElementById('leaderboard');
     let leadersList = Array.from(leaderboard.querySelectorAll('.leader'));
-    let name = document.getElementById('nameField').value;
+    let name = document.getElementById('usernameField').value;
     let score = parseInt(document.getElementById('scoreWindow').textContent);
 
     for (let leaderIndex=0; leaderIndex < leadersList.length; leaderIndex++) {

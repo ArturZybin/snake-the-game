@@ -1,0 +1,71 @@
+.normal-point {
+   position: absolute;
+   top: 10px;
+   left: 10px;
+
+   width: 15px;
+   height: 15px;
+
+   border: 1px solid white;
+   border-radius: 5px;
+   background-color: red;
+}
+
+.special-point {
+   position: absolute;
+   top: 5px;
+   left: 5px;
+
+   width: 25px;
+   height: 25px;
+
+   animation: vibrate .3s linear infinite both;
+
+   border: 1px solid white;
+   border-radius: 10px;
+}
+
+@keyframes vibrate {
+   0% {
+       transform: translate(0);
+   }20% {
+       transform: translate(-1px,1px);
+   }40% {
+       transform: translate(-1px,-1px);
+   }60% {
+       transform: translate(1px,1px);
+   }80% {
+       transform: translate(1px,-1px);
+   }100% {
+       transform: translate(0);
+   }
+}
+
+.special-point-indicator {
+   position: absolute;
+   top: -5px;
+   left: -3px;
+
+   width: 130%;
+   height: 2px;
+
+   animation: decrease-to-zero 4s cubic-bezier(.250, .460, .450, .940) both;
+
+   border: none;
+   background-color: #03fc36;
+}
+@keyframes decrease-to-zero {
+   0% {
+       width: 130%;
+   }100% {
+       width: 0;
+   }
+}
+
+.bonus-point {
+   background-color: red;
+}
+
+.poisoned-point {
+   background-color: #6da758;
+}

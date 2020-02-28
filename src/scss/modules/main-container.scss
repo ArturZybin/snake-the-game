@@ -1,0 +1,303 @@
+.main-container {
+   position: relative;
+
+   width: 100%;
+   height: 100%;
+}
+
+.main-container-locker {
+   position: absolute;
+
+   width: 100%;
+   height: 100%;
+
+   background: none;
+}
+
+//--------------------------------------------------------
+.field {
+   font-size: 0;
+
+   position: absolute;
+   top: 10px;
+   left: 10px;
+
+   box-sizing: padding-box;
+   width: 600px;
+   height: 600px;
+
+   table-layout: fixed;
+   border-collapse: collapse;
+
+   box-shadow: 0 0 10px #ed4623;
+
+   &-cell {
+      font-size: 0;
+      line-height: 0;
+   
+      position: relative;
+   
+      overflow: hidden;
+   
+      width: 35px;
+      height: 35px;
+      margin: 0;
+      padding: 0;
+   }
+
+   &-row:nth-child(even) .field-cell:nth-child(even),
+   &-row:nth-child(odd) .field-cell:nth-child(odd) {
+      background-color: #1d1d1d;
+   }
+}
+
+.barrier {
+   width: 35px;
+   height: 35px;
+
+   border: 1px solid white;
+   background-color: brown;
+}
+
+//--------------------------------------------------------
+.leaderboard {
+   font-size: 25px;
+
+   position: absolute;
+   top: 10px;
+   right: 10px;
+
+   display: flex;
+   flex-direction: column;
+
+   width: 200px;
+   height: 250px;
+   padding: 15px;
+   padding-top: 7px;
+
+   cursor: default;
+   text-align: center;
+
+   color: #9c43c7;
+   box-shadow: 0 0 10px #ed4623;
+
+   justify-content: space-around;
+
+   &-title {
+      font-weight: bold;
+   
+      border-bottom: 1px solid #a9a9a9;
+   }
+   .leader-name,
+   .leader-score {
+      font-size: 19px;
+   
+      display: inline-block;
+   }
+}
+
+//--------------------------------------------------------
+.score-window {
+   font-size: 28px;
+   font-weight: bold;
+   line-height: 1.1em;
+
+   position: absolute;
+   top: 410px;
+   right: 25px;
+
+   width: 95px;
+   height: 38px;
+
+   text-align: center;
+
+   color: #9c43c7;
+   border: none;
+   border-radius: 10px;
+   box-shadow: 0 0 10px #ed4623;
+}
+
+//--------------------------------------------------------
+.arrows-container{
+   position: absolute;
+   top: 275px;
+   right: 70px;
+
+   width: 135px;
+   height: 105px;
+}
+
+.arrow {
+   position: absolute;
+
+   width: 45px;
+   height: 45px;
+
+   cursor: pointer;
+   text-align: center;
+
+   border: none;
+   border-radius: 50%;
+   background-color: transparent;
+   box-shadow: 0 0 8px #23caed;
+
+   &:hover {
+      box-shadow: 0 0 8px #5ba6b5;
+   }
+   &:active {
+      box-shadow: 0 0 3px #5ba6b5;
+   }
+   &:focus {
+      outline: none;
+   }
+
+   &-left {
+      top: 28px;
+      left: 2px;
+
+      &-picture {
+         transform: rotate(225deg);
+      }
+   }
+   &-up {
+      top: 4px;
+      left: 45px;
+
+      &-picture {
+         transform: rotate(-45deg);
+      }
+   }
+   &-right {
+      top: 28px;
+      right: 2px;
+
+      &-picture {
+         transform: rotate(45deg);
+      }
+   }
+   &-down {
+      bottom: 4px;
+      left: 45px;
+
+      &-picture {
+         transform: rotate(135deg);
+      }
+   }
+
+   &-picture {
+      position: relative;
+      left: 8px;
+   
+      width: 15px;
+      height: 15px;
+   
+      cursor: pointer;
+   
+      border: 1px solid tomato;
+      border-width: 2px 2px 0 0;
+      background: none;
+   }
+}
+
+.active-screen-arrow {
+   box-shadow: 0 0 3px #5ba6b5 !important;
+}
+
+//--------------------------------------------------------
+.start-button {
+   font-size: 24px;
+
+   position: absolute;
+   top: 410px;
+   right: 25px;
+
+   width: 95px;
+   height: 38px;
+   padding: 5px 10px;
+
+   cursor: pointer;
+   text-transform: uppercase;
+
+   color: #9c43c7;
+   border: none;
+   border-radius: 10px;
+   background: none;
+   box-shadow: 0 0 10px #ed4623;
+
+   &:hover {
+      color: #d12ec8;
+      box-shadow: 0 0 10px #eb1424;
+   }
+   &:active {
+      color: #d12ec8;
+      box-shadow: 0 0 3px #eb1424;
+   }
+   &:focus {
+      outline: none;
+   }
+}
+
+//--------------------------------------------------------
+.caged-snake,
+.cage {
+    position: absolute;
+    top: 395px;
+    right: 160px;
+
+    width: 70px;
+
+    cursor: pointer;
+}
+.dragged-caged-snake {
+    z-index: 50;
+}
+
+//--------------------------------------------------------
+.gift {
+   position: absolute;
+   top: 490px;
+   right: 15px;
+
+   width: 100px;
+   height: 100px;
+
+   cursor: pointer;
+   animation: jumping .4s cubic-bezier(.250, .460, .450, .940) infinite alternate-reverse both;
+}
+
+@keyframes jumping {
+   0% {
+       transform: translateY(0);
+   }
+   100% {
+       transform: translateY(-10px);
+   }
+}
+
+//--------------------------------------------------------
+.settings-button {
+   position: absolute;
+   top: 515px;
+   right: 140px;
+
+   cursor: pointer;
+
+   border: none;
+   background: none;
+
+   &:focus {
+      outline: none;
+   }
+}
+.settings-icon {
+   width: 70px;
+
+   cursor: pointer;
+   transition-duration: 200ms;
+
+   background: none;
+
+   &:hover {
+      transform: rotate(45deg);
+   }
+}
