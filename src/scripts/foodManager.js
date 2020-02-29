@@ -47,6 +47,7 @@ function moveNormalPoint() {
 function generateRandomSpecialPoint() {
     const randomPercentage = Math.floor(Math.random() * (101));
     if (randomPercentage <= 30) {
+        if (!fieldProperties.poisonedPoints) return;
         generateSpecialPoint('poisoned');
     } else {
         generateSpecialPoint('bonus');
