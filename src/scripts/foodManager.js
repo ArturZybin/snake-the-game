@@ -30,23 +30,23 @@ function endPointsGeneration() {
 
 
 function generateNormalPoint() {
-    let point = document.createElement('div');
+    const point = document.createElement('div');
     point.classList.add('normal-point');
     point.id = 'normalPoint';
 
-    let cell = getRandomEmptyCell();
+    const cell = getRandomEmptyCell();
 
     cell.append(point);
 }
 function moveNormalPoint() {
-    let point = document.getElementById('normalPoint');
-    let cell = getRandomEmptyCell();
+    const point = document.getElementById('normalPoint');
+    const cell = getRandomEmptyCell();
     cell.append(point);
 }
 
 
 function generateRandomSpecialPoint() {
-    let randomPercentage = Math.floor(Math.random() * (101));
+    const randomPercentage = Math.floor(Math.random() * (101));
     if (randomPercentage <= 30) {
         generatePoisonedPoint();
     } else {
@@ -57,22 +57,22 @@ function generateRandomSpecialPoint() {
 function generateBonusPoint() {
     if (!fieldProperties.bonusPoints) return;
 
-    let point = document.createElement('div');
+    const point = document.createElement('div');
     point.classList.add('special-point');
     point.classList.add('bonus-point');
     point.id = 'bonusPoint';
 
-    let pointIndicator = document.createElement('div');
+    const pointIndicator = document.createElement('div');
     pointIndicator.classList.add('special-point-indicator');
 
-    let cell = getRandomEmptyCell();
+    const cell = getRandomEmptyCell();
     cell.append(point);
     point.append(pointIndicator);
 
     setTimeout(removeBonusPoint, 4000)
 }
 function removeBonusPoint() {
-    let point = document.getElementById('bonusPoint');
+    const point = document.getElementById('bonusPoint');
     if (!point) return;
     point.remove();
 }
@@ -80,32 +80,32 @@ function removeBonusPoint() {
 function generatePoisonedPoint() {
     if (!fieldProperties.poisonedPoints) return;
 
-    let point = document.createElement('div');
+    const point = document.createElement('div');
     point.classList.add('special-point');
     point.classList.add('poisoned-point');
     point.id = 'poisonedPoint';
 
-    let pointIndicator = document.createElement('div');
+    const pointIndicator = document.createElement('div');
     pointIndicator.classList.add('special-point-indicator');
 
-    let cell = getRandomEmptyCell();
+    const cell = getRandomEmptyCell();
     cell.append(point);
     point.append(pointIndicator);
 
     setTimeout(removePoisonedPoint, 4000)
 }
 function removePoisonedPoint() {
-    let point = document.getElementById('poisonedPoint');
+    const point = document.getElementById('poisonedPoint');
     if (!point) return;
     point.remove();
 }
 
 
 function getRandomEmptyCell() {
-    let field = document.getElementById('field');
+    const field = document.getElementById('field');
     for (let i = 0; i < 200; i++) {
-        let randomRow = field.rows[Math.floor(Math.random() * (field.rows.length))];
-        let randomCell = randomRow.cells[Math.floor(Math.random() * (randomRow.cells.length))];
+        const randomRow = field.rows[Math.floor(Math.random() * (field.rows.length))];
+        const randomCell = randomRow.cells[Math.floor(Math.random() * (randomRow.cells.length))];
         if (randomCell.innerHTML == '') return randomCell;
     }
 

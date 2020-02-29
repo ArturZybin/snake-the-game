@@ -25,18 +25,18 @@ document.getElementById('gift').addEventListener('click', takeGift);
 
 
 function createNewField() {
-    let field = document.getElementById('field');
+    const field = document.getElementById('field');
     field.innerHTML = '';
     createFieldCells(field);
 }
 
 
 function createFieldCells(field) {
-    let fieldSize = 17;
+    const fieldSize = 17;
     for (let i = 0; i < fieldSize; i++) {
-        let row = document.createElement('tr');
+        const row = document.createElement('tr');
         for (let j = 0; j < fieldSize; j++) {
-            let cell = document.createElement('td');
+            const cell = document.createElement('td');
             cell.classList.add('field-cell');
             row.append(cell);
         };
@@ -47,20 +47,20 @@ function createFieldCells(field) {
 
 
 function createBarriers() {
-    let field = document.getElementById('field');
-    let fieldSize = field.rows.length;
-    let barriersRows = [3, 9, 13];
-    let barrierLength = 10;
+    const field = document.getElementById('field');
+    const fieldSize = field.rows.length;
+    const barriersRows = [3, 9, 13];
+    const barrierLength = 10;
     
     for (let i=0; i < barriersRows.length; i++) {
         
         if (i & 1) {
             for (let cell = 0; cell < barrierLength; cell++){
-                createBarrierCell(field.rows[ barriersRows[i] ].cells[cell]);
+                createBarrierCell( field.rows[ barriersRows[i] ].cells[cell] );
             }
         } else {
             for (let cell = fieldSize-1; cell >= fieldSize - barrierLength; cell--) {
-                createBarrierCell(field.rows[ barriersRows[i] ].cells[cell]);
+                createBarrierCell( field.rows[ barriersRows[i] ].cells[cell] );
             }
         }
         
@@ -68,16 +68,16 @@ function createBarriers() {
 }
 
 function createBarrierCell(cell) {
-    let barrier = document.createElement('div');
+    const barrier = document.createElement('div');
     barrier.classList.add('barrier');
     cell.append(barrier);
 }
 
 
 function openSettings() {
-    let mainContainer = document.getElementById('mainContainer');
-    let mainContainerLocker = document.getElementById('mainContainerLocker');
-    let settingsContainer = document.getElementById('settingsContainer');
+    const mainContainer = document.getElementById('mainContainer');
+    const mainContainerLocker = document.getElementById('mainContainerLocker');
+    const settingsContainer = document.getElementById('settingsContainer');
 
     mainContainer.classList.add('blured');
     mainContainerLocker.removeAttribute('hidden');
@@ -90,9 +90,9 @@ function openSettings() {
 function closeSettings() {
     document.dispatchEvent(new CustomEvent('settingsClosed'))
 
-    let mainContainer = document.getElementById('mainContainer');
-    let mainContainerLocker = document.getElementById('mainContainerLocker');
-    let settingsContainer = document.getElementById('settingsContainer');
+    const mainContainer = document.getElementById('mainContainer');
+    const mainContainerLocker = document.getElementById('mainContainerLocker');
+    const settingsContainer = document.getElementById('settingsContainer');
 
     mainContainer.classList.remove('blured');
     mainContainerLocker.hidden = 'true';
@@ -135,13 +135,13 @@ function untriggerScreenArrowClick(event) {
 
 // take name from settings and score from score field
 function updateLeaderboard() {
-    let leaderboard = document.getElementById('leaderboard');
-    let leadersList = Array.from(leaderboard.querySelectorAll('.leader'));
-    let name = document.getElementById('usernameField').value;
-    let score = parseInt(document.getElementById('scoreWindow').textContent);
+    const leaderboard = document.getElementById('leaderboard');
+    const leadersList = Array.from(leaderboard.querySelectorAll('.leader'));
+    const name = document.getElementById('usernameField').value;
+    const score = parseInt(document.getElementById('scoreWindow').textContent);
 
     for (let leaderIndex=0; leaderIndex < leadersList.length; leaderIndex++) {
-        let currentLeaderScore = leadersList[leaderIndex].querySelector('.leader-score').textContent;
+        const currentLeaderScore = leadersList[leaderIndex].querySelector('.leader-score').textContent;
 
         if (currentLeaderScore == '--||--' || parseInt(currentLeaderScore) < score) {
             // moving leaders to insert the new one
@@ -163,13 +163,13 @@ function updateLeaderboard() {
 
 
 function saveLeaderboard() {
-    let leaderboard = document.getElementById('leaderboard');
-    let leadersList = Array.from(leaderboard.querySelectorAll('.leader'));
+    const leaderboard = document.getElementById('leaderboard');
+    const leadersList = Array.from(leaderboard.querySelectorAll('.leader'));
     
     let leadersJSON = [];
     for (let leader of leadersList) {
-        let name = leader.querySelector('.leader-name').textContent;
-        let score = leader.querySelector('.leader-score').textContent;
+        const name = leader.querySelector('.leader-name').textContent;
+        const score = leader.querySelector('.leader-score').textContent;
         leadersJSON.push([name, score]);
     }
     
@@ -177,10 +177,10 @@ function saveLeaderboard() {
 }
 
 function setupSavedLeaderboard() {
-    let leaderboard = document.getElementById('leaderboard');
-    let leadersList = Array.from(leaderboard.querySelectorAll('.leader'));
+    const leaderboard = document.getElementById('leaderboard');
+    const leadersList = Array.from(leaderboard.querySelectorAll('.leader'));
     
-    let leadersJSON = JSON.parse(localStorage.getItem('leaders'));
+    const leadersJSON = JSON.parse(localStorage.getItem('leaders'));
     if (!leadersJSON) return;
     for (let index = 0; index < leadersJSON.length; index++) {
         leadersList[index].querySelector('.leader-name').textContent = leadersJSON[index][0];
@@ -190,23 +190,23 @@ function setupSavedLeaderboard() {
 
 
 function changeScore(changing) {
-    let scoreWindow = document.getElementById('scoreWindow');
-    let score = parseInt(scoreWindow.textContent)
+    const scoreWindow = document.getElementById('scoreWindow');
+    const score = parseInt(scoreWindow.textContent)
     score += changing;
     scoreWindow.textContent = score;
 }
 function setScore(score) {
-    let scoreWindow = document.getElementById('scoreWindow');
+    const scoreWindow = document.getElementById('scoreWindow');
     scoreWindow.textContent = score;
 }
 
 
 
 function takeGift() {
-    let giftBox = document.getElementById('gift');
-    let giftsList = ['img/candy.png', 'img/cake.png', 'img/bear.png'];
+    const giftBox = document.getElementById('gift');
+    const giftsList = ['img/candy.png', 'img/cake.png', 'img/bear.png'];
 
-    let randomIndex = Math.floor(Math.random() * 3)
+    const randomIndex = Math.floor(Math.random() * 3)
     giftBox.src = giftsList[randomIndex];
     giftBox.style.animation = 'none';
 }

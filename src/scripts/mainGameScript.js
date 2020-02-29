@@ -146,7 +146,7 @@ function isWinning() {
 }
 
 function isLosing() {
-    let snake = snakeProperties.snakePartsList;
+    const snake = snakeProperties.snakePartsList;
     const nextHeadCell = getNextHeadCell();
 
     for (let snakePart of snake) {
@@ -190,8 +190,8 @@ function endGame() {
 
 // CSS-class for the message must start with the text value
 function showMessage(text) {
-    let mainContainerLocker = document.getElementById('mainContainerLocker');
-    let mainContainer = document.getElementById('mainContainer');
+    const mainContainerLocker = document.getElementById('mainContainerLocker');
+    const mainContainer = document.getElementById('mainContainer');
     mainContainerLocker.removeAttribute('hidden');
     mainContainer.classList.add('blured');
 

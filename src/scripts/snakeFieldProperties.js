@@ -43,15 +43,15 @@ let fieldProperties = {
 
 
 function setNewSnakeProperties() {
-    let snakeSettingsForm = document.forms.snakeSettingsForm;
+    const snakeSettingsForm = document.forms.snakeSettingsForm;
     setSnakeColor(snakeSettingsForm);
     setSnakeSpeed(snakeSettingsForm);
 }
 
 function setSnakeColor(snakeSettingsForm) {
-    let aviableSnakeColors = snakeSettingsForm.elements.snakeColor;
+    const availableSnakeColors = snakeSettingsForm.elements.snakeColor;
     let currentSnakeColor;
-    for (let color of aviableSnakeColors) {
+    for (let color of availableSnakeColors) {
         if (color.checked) {
             currentSnakeColor = color.value;
         }
@@ -60,9 +60,9 @@ function setSnakeColor(snakeSettingsForm) {
 }
 
 function setSnakeSpeed(snakeSettingsForm) {
-    let aviableSnakeSpeed = snakeSettingsForm.elements.snakeSpeed;
+    const availableSnakeSpeed = snakeSettingsForm.elements.snakeSpeed;
     let currentSnakeSpeed;
-    for (let speed of aviableSnakeSpeed) {
+    for (let speed of availableSnakeSpeed) {
         if (speed.checked) {
             currentSnakeSpeed = speed.value;
         };
@@ -72,7 +72,7 @@ function setSnakeSpeed(snakeSettingsForm) {
 
 
 function setNewFieldProperties() {
-    let fieldSettingsForm = document.forms.fieldSettingsForm;
+    const fieldSettingsForm = document.forms.fieldSettingsForm;
 
     for (let option of fieldSettingsForm.elements) {
         if (option.checked) {
