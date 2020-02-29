@@ -114,25 +114,32 @@ function oneStepAlgorithm(intervalId) {
 
 
 function enableScreenArrows() {
-    let arrowsList = Array.from(document.getElementsByClassName('arrow'));
+    const arrowsList = Array.from(document.getElementsByClassName('arrow'));
     arrowsList.forEach(arrow => {
-        // transfer object with the fake key arrow code
-        // to the change-direction function
-        arrow.onclick = () => changeMovingDirection({'code': arrow.id});
+        const arrowClick = new CustomEvent('arrowClick', {
+            detail: {code: arrow.id}
+        })
+        
+        arrow.onclick = () => changeMovingDirection(arrowClick);
+        arrow.ontouchstart = (event) => {
+            event.preventDefault();
+            changeMovingDirection(arrowClick);
+        };
     })
 }
 
 
 function disableScreenArrows() {
-    let arrowsList = Array.from(document.getElementsByClassName('arrow'));
+    const arrowsList = Array.from(document.getElementsByClassName('arrow'));
     arrowsList.forEach(arrow => {
         arrow.onclick = null;
+        arrow.ontouchstart = null;
     })
 }
 
 
 function isWinning() {
-    let field = document.getElementById('field');
+    const field = document.getElementById('field');
     if (snakeProperties.snakePartsList.length == field.rows.length * field.rows[0].cells.length) {
         return true;
     }
@@ -140,7 +147,7 @@ function isWinning() {
 
 function isLosing() {
     let snake = snakeProperties.snakePartsList;
-    let nextHeadCell = getNextHeadCell();
+    const nextHeadCell = getNextHeadCell();
 
     for (let snakePart of snake) {
         if (snakePart.closest('td') == nextHeadCell && snakePart != snake[0]) {
@@ -152,7 +159,7 @@ function isLosing() {
 
     if (!nextHeadCell) return true;
     
-    let barriers = document.getElementsByClassName('barrier');
+    const barriers = document.getElementsByClassName('barrier');
     for (let barrier of barriers) {
         if (barrier.closest('td') == nextHeadCell) return true;
     }

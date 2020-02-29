@@ -188,7 +188,9 @@ function getNextHeadCell() {
 
 function changeMovingDirection(event) {
     let nextMovingDirection = snakeProperties.movingDirection;
-    switch (event.code) {
+    const arrow = event.detail ? event.detail.code : event.code;
+    
+    switch (arrow) {
         case 'ArrowRight':
             nextMovingDirection = 'right';
             break;
