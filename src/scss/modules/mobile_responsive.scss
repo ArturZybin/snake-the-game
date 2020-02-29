@@ -1,9 +1,5 @@
 @media (orientation: portrait) {
     .container {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-
         width: 620px;
         height: 885px;
 
@@ -46,5 +42,8 @@
     }
     .message {
         left: 10px;
+    }
+    .settings-container {
+        zoom: 1.3;
     }
 }

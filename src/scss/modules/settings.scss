@@ -3,10 +3,13 @@
    right: -35px;
 
    &:hover {
-      transition-duration: 50ms;
       transform: scale(1.1);
    
       filter: saturate(150%);
+   }
+
+   img {
+      cursor: pointer;
    }
 }
 .close-settings-icon {
