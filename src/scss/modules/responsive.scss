@@ -82,31 +82,34 @@
     }
 }
 
-@media screen and (orientation: portrait) and  (max-height: 1000px) {
+@media screen and (orientation: portrait) and (max-height: 1000px) {
     body {
-        zoom: 0.9;
+        zoom: .9;
     }
 }
 
-@media screen and (orientation: portrait) and  (max-height: 800px) {
-    body {
-        zoom: .7;
-    }
-}
-
-@media screen and (orientation: portrait) and  (max-height: 800px) {
+@media screen and (orientation: portrait) and (max-height: 800px),
+screen and (orientation: portrait) and (max-width: 550px) {
     body {
         zoom: .7;
     }
 }
 
-@media screen and (orientation: portrait) and  (max-height: 600px) {
+@media screen and (orientation: portrait) and (max-height: 800px),
+screen and (orientation: portrait) and (max-width: 550px) {
+    body {
+        zoom: .7;
+    }
+}
+
+@media screen and (orientation: portrait) and (max-height: 600px) {
     body {
         zoom: .6;
     }
 }
 
-@media screen and (orientation: portrait) and  (max-height: 550px) {
+@media screen and (orientation: portrait) and (max-height: 550px), 
+screen and (orientation: portrait) and (max-width: 300px) {
     body {
         zoom: .5;
     }
