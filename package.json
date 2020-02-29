@@ -32,7 +32,7 @@
     "not dead",
     "iOS >= 9"
   ],
-  "homepage": "https://github.com/ArturZybin/Snake-the-game#readme",
+  "homepage": "https://github.com/ArturZybin/snake-the-game#readme",
   "devDependencies": {
     "@babel/core": "^7.8.6",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
