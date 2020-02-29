@@ -9,12 +9,9 @@ export {
     createBarriers,
     changeScore,
     setScore,
-    updateLeaderboard
+    updateLeaderboard,
+    setupSavedLeaderboard
 };
-
-
-createNewField();
-setupSavedLeaderboard();
 
 
 document.getElementById('settingsButton').addEventListener('click', openSettings);

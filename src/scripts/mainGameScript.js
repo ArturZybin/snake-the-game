@@ -13,7 +13,8 @@ import {
     createBarriers,
     changeScore,
     setScore,
-    updateLeaderboard
+    updateLeaderboard,
+    setupSavedLeaderboard
 } from './interfaceManager.js';
 
 import {
@@ -38,6 +39,9 @@ import {
 export {
     startGame
 }
+
+createNewField();
+setupSavedLeaderboard();
 
 document.addEventListener('settingsClosed', setNewFieldProperties);
 document.addEventListener('settingsClosed', setNewSnakeProperties);
