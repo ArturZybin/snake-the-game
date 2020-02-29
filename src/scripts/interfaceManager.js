@@ -10,7 +10,8 @@ export {
     changeScore,
     setScore,
     updateLeaderboard,
-    setupSavedLeaderboard
+    setupSavedLeaderboard,
+    setupZoom
 };
 
 
@@ -198,7 +199,6 @@ function setScore(score) {
 }
 
 
-
 function takeGift() {
     const giftBox = document.getElementById('gift');
     const giftsList = ['img/candy.png', 'img/cake.png', 'img/bear.png'];
@@ -206,4 +206,21 @@ function takeGift() {
     const randomIndex = Math.floor(Math.random() * 3)
     giftBox.src = giftsList[randomIndex];
     giftBox.style.animation = 'none';
+}
+
+
+function setupZoom() {
+    const container = document.getElementById('container');
+    const containerRect = container.getBoundingClientRect();
+    const windowWidth = document.documentElement.clientWidth;
+    const windowHeight = document.documentElement.clientHeight;
+
+    const widthRelation = windowWidth / containerRect.width;
+    const heightRelation = windowHeight / containerRect.height;
+
+    if (widthRelation > 1 && heightRelation > 1) return;
+
+    const zoom = Math.min(widthRelation, heightRelation);
+
+    document.body.style.zoom = zoom;
 }

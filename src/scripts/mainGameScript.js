@@ -14,7 +14,8 @@ import {
     changeScore,
     setScore,
     updateLeaderboard,
-    setupSavedLeaderboard
+    setupSavedLeaderboard,
+    setupZoom
 } from './interfaceManager.js';
 
 import {
@@ -39,6 +40,10 @@ import {
 export {
     startGame
 }
+
+
+setupZoom();
+window.onresize = setupZoom;
 
 createNewField();
 setupSavedLeaderboard();

@@ -1,0 +1,50 @@
+@media (orientation: portrait) {
+    .container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+
+        width: 620px;
+        height: 885px;
+
+        transform: translate(-310px, -442px);
+    }
+    .leaderboard {
+        top: 625px;
+        left: 10px;
+    }
+    .arrows-container {
+        top: 330px;
+        left: 130px;
+
+        zoom: 1.9;
+    }
+    .cage,
+    .caged-snake {
+        top: 625px;
+        left: 540px;
+    }
+    .start-button {
+        top: 820px;
+        left: 230px;
+    }
+    .score-window {
+        top: 820px;
+        left: 230px;
+    }
+    .settings-button {
+        top: 800px;
+        left: 420px;
+    }
+    .gift {
+        top: 760px;
+        left: 520px;
+    }
+    .close-settings-button {
+        top: -35px;
+        left: 395px;
+    }
+    .message {
+        left: 10px;
+    }
+}
