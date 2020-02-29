@@ -28,9 +28,12 @@ import {
     eatNextCell,
     moveSnake,
     addBodyPart,
-    startSnakeDragging,
     drawSnakeBorder
 } from './snakeScripts.js';
+
+import {
+    startSnakeDragging,
+} from './dragCagedSnake.js';
 
 export {
     startGame
