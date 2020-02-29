@@ -4,4 +4,4 @@ Nearly all the elements are interactive, you can drag the snake cage and drop it
 
 Snake and field are also editable, you can set their parameters at the settings
 
-Enjoy the game =) It available at https://arturzybin.github.io/Snake-the-game/
+Enjoy the game =) It available at https://arturzybin.github.io/snake-the-game/
