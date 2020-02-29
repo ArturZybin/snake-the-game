@@ -7,7 +7,7 @@
     "dev": "npx cross-env NODE_ENV=development npx webpack --mode development",
     "build": "npx cross-env NODE_ENV=production npx webpack --mode production",
     "start": "cross-env NODE_ENV=development webpack-dev-server --mode development --open",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d dist",
     "test": "npx jest"
   },
   "repository": {
