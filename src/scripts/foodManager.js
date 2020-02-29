@@ -20,8 +20,7 @@ function startPointsGeneration() {
     specialPointsInterval = setInterval(generateRandomSpecialPoint, 15000);
 
     document.addEventListener('normalPointEaten', moveNormalPoint);
-    document.addEventListener('bonusPointEaten', removeBonusPoint);
-    document.addEventListener('poisonedPointEaten', removePoisonedPoint);
+    document.addEventListener('specialPointEaten', removeSpecialPoint);
 }
 
 function endPointsGeneration() {
@@ -48,19 +47,19 @@ function moveNormalPoint() {
 function generateRandomSpecialPoint() {
     const randomPercentage = Math.floor(Math.random() * (101));
     if (randomPercentage <= 30) {
-        generatePoisonedPoint();
+        generateSpecialPoint('poisoned');
     } else {
-        generateBonusPoint();
+        generateSpecialPoint('bonus');
     }
 }
 
-function generateBonusPoint() {
+function generateSpecialPoint(type) {
     if (!fieldProperties.bonusPoints) return;
 
     const point = document.createElement('div');
     point.classList.add('special-point');
-    point.classList.add('bonus-point');
-    point.id = 'bonusPoint';
+    point.classList.add(`${type}-point`);
+    point.id = 'specialPoint';
 
     const pointIndicator = document.createElement('div');
     pointIndicator.classList.add('special-point-indicator');
@@ -69,33 +68,10 @@ function generateBonusPoint() {
     cell.append(point);
     point.append(pointIndicator);
 
-    setTimeout(removeBonusPoint, 4000)
+    setTimeout(removeSpecialPoint, 4000)
 }
-function removeBonusPoint() {
-    const point = document.getElementById('bonusPoint');
-    if (!point) return;
-    point.remove();
-}
-
-function generatePoisonedPoint() {
-    if (!fieldProperties.poisonedPoints) return;
-
-    const point = document.createElement('div');
-    point.classList.add('special-point');
-    point.classList.add('poisoned-point');
-    point.id = 'poisonedPoint';
-
-    const pointIndicator = document.createElement('div');
-    pointIndicator.classList.add('special-point-indicator');
-
-    const cell = getRandomEmptyCell();
-    cell.append(point);
-    point.append(pointIndicator);
-
-    setTimeout(removePoisonedPoint, 4000)
-}
-function removePoisonedPoint() {
-    const point = document.getElementById('poisonedPoint');
+function removeSpecialPoint() {
+    const point = document.getElementById('specialPoint');
     if (!point) return;
     point.remove();
 }

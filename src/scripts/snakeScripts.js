@@ -249,14 +249,17 @@ function eatNextCell() {
         document.dispatchEvent(new CustomEvent('normalPointEaten'))
     }
 
-    const bonusPoint = document.getElementById('bonusPoint');
+    const specialPoint = document.getElementById('specialPoint');
+    if (!specialPoint) return;
+
+    const bonusPoint = specialPoint.classList.contains('bonus-point') ? specialPoint : null;
     if (bonusPoint && nextCell.contains(bonusPoint)) {
         changeScore(5);
         snakeProperties.newPartsQueueLength += 3;
-        document.dispatchEvent(new CustomEvent('bonusPointEaten'))
+        document.dispatchEvent(new CustomEvent('specialPointEaten'))
     }
 
-    const poisonedPoint = document.getElementById('poisonedPoint');
+    const poisonedPoint = specialPoint.classList.contains('poisoned-point') ? specialPoint : null;
     if (poisonedPoint && nextCell.contains(poisonedPoint)) {
         changeScore(-5);
         let removableBodyPartsCount = 3;
@@ -264,7 +267,7 @@ function eatNextCell() {
             removeBodyPart();
             changeScore(-10);
         }
-        document.dispatchEvent(new CustomEvent('poisonedPointEaten'))
+        document.dispatchEvent(new CustomEvent('specialPointEaten'))
     }
 }
 

@@ -191,7 +191,7 @@ function setupSavedLeaderboard() {
 
 function changeScore(changing) {
     const scoreWindow = document.getElementById('scoreWindow');
-    const score = parseInt(scoreWindow.textContent)
+    let score = parseInt(scoreWindow.textContent)
     score += changing;
     scoreWindow.textContent = score;
 }
