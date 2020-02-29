@@ -22,14 +22,22 @@
   ],
   "author": "Artur Zybin <artur.zybin.work@gmail.com>",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ArturZybin/Snake-the-game/issues"
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
   },
+  "browserslist": [
+    "last 2 version",
+    "not dead",
+    "iOS >= 9"
+  ],
   "homepage": "https://github.com/ArturZybin/Snake-the-game#readme",
   "devDependencies": {
     "@babel/core": "^7.8.6",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/preset-env": "^7.8.6",
+    "autoprefixer": "^9.7.4",
     "babel-loader": "^8.0.6",
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^5.1.1",
@@ -42,6 +50,7 @@
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.13.1",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "postcss-loader": "^3.0.0",
     "sass-loader": "^8.0.2",
     "terser-webpack-plugin": "^2.3.5",
     "webpack": "^4.41.6",
