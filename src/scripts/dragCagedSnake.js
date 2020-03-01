@@ -28,15 +28,9 @@ export {
 function startSnakeDragging(event) {
    event.preventDefault();
 
-   let tempZoom = getComputedStyle(document.body).zoom;
-   if (!tempZoom) {
-      // getting zoom from 'matrix' prop in firefox or opera
-      const scale = getComputedStyle(document.body).MozTransform;
-      tempZoom = scale.match(/\(.*?(?=,)/)[0];
-      // firefox doesn't support escaping in lookbehind (very strange...)
-      // so slice open parenthesis
-      tempZoom = tempZoom.slice(1);
-   }
+   let tempZoom = getComputedStyle(document.body).transform;
+   tempZoom = tempZoom.match(/\(.*?(?=,)/)[0];
+   tempZoom = tempZoom.slice(1);
    const zoom = tempZoom;
 
    const snake = document.getElementById('cagedSnake');
@@ -54,8 +48,8 @@ function startSnakeDragging(event) {
    }
 
    const snakeRect = snake.getBoundingClientRect();
-   const snakeShiftX = event.clientX/zoom - snakeRect.left;
-   const snakeShiftY = event.clientY/zoom - snakeRect.top;
+   const snakeShiftX = event.clientX - snakeRect.left;
+   const snakeShiftY = event.clientY - snakeRect.top;
 
    document.addEventListener('mousemove', moveDraggingSnake);
    document.addEventListener('mousemove', showStartingSnake);
@@ -79,16 +73,16 @@ function startSnakeDragging(event) {
 
        const snake = document.getElementById('cagedSnake');
        const snakeRect = snake.getBoundingClientRect();
-       let left = event.clientX/zoom - snakeShiftX;
-       let top = event.clientY/zoom - snakeShiftY;
+       let left = event.clientX - snakeShiftX;
+       let top = event.clientY - snakeShiftY;
 
        if (left < containerRect.left) left = containerRect.left;
        if (left > containerRect.right - snakeRect.width) left = containerRect.right - snakeRect.width;
        if (top < containerRect.top) top = containerRect.top;
        if (top > containerRect.bottom - snakeRect.height) top = containerRect.bottom - snakeRect.height;
 
-       snake.style.left = left - containerLeft + 'px';
-       snake.style.top = top - containerTop + 'px';
+       snake.style.left = (left - containerLeft)/zoom + 'px';
+       snake.style.top = (top - containerTop)/zoom + 'px';
    }
 
    // shows snake shape at field

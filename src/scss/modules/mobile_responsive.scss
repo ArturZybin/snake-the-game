@@ -13,7 +13,8 @@
         top: 330px;
         left: 130px;
 
-        zoom: 1.9;
+        transform: scale(1.9);
+        transform-origin: -100% -310%;
     }
     .cage,
     .caged-snake {
@@ -44,6 +45,7 @@
         left: 10px;
     }
     .settings-container {
-        zoom: 1.3;
+        transform: scale(1.3);
+        transform-origin: 225% 225%;
     }
 }
