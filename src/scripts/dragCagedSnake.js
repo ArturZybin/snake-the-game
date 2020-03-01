@@ -26,7 +26,18 @@ export {
 
 
 function startSnakeDragging(event) {
-   const zoom = getComputedStyle(document.body).zoom;
+   event.preventDefault();
+
+   let tempZoom = getComputedStyle(document.body).zoom;
+   if (!tempZoom) {
+      // getting zoom from 'matrix' prop in firefox or opera
+      const scale = getComputedStyle(document.body).MozTransform;
+      tempZoom = scale.match(/\(.*?(?=,)/)[0];
+      // firefox doesn't support escaping in lookbehind (very strange...)
+      // so slice open parenthesis
+      tempZoom = tempZoom.slice(1);
+   }
+   const zoom = tempZoom;
 
    const snake = document.getElementById('cagedSnake');
    if (snake.hasAttribute('hidden')) return;

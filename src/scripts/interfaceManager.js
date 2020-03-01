@@ -210,6 +210,8 @@ function takeGift() {
 
 
 function setupZoom() {
+   document.body.style.MozTransform = 'scale(1)';
+
     const container = document.getElementById('container');
     const containerRect = container.getBoundingClientRect();
     const windowWidth = document.documentElement.clientWidth;
@@ -223,4 +225,5 @@ function setupZoom() {
     const zoom = Math.min(widthRelation, heightRelation);
 
     document.body.style.zoom = zoom;
+    document.body.style.MozTransform = `scale(${zoom})`;
 }
