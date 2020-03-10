@@ -22,9 +22,9 @@ To install all dependencies run ```npm install``` inside the project directory
 
 To run the project with the local server run ```npm start``` inside the project directory
 
-To build the production version of the project to a dist folder run ```npm run build``` inside the project directory
+To build the **production** version of the project to a dist folder run ```npm run build``` inside the project directory
 
-To build the development version of the project to a dist folder run ```npm run dev``` inside the project directory
+To build the **development** version of the project to a dist folder run ```npm run dev``` inside the project directory
 
 ## Authors
 
