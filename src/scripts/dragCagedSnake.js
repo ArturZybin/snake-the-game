@@ -28,10 +28,10 @@ export {
 function startSnakeDragging(event) {
    event.preventDefault();
 
-   let tempZoom = getComputedStyle(document.body).transform;
-   tempZoom = tempZoom.match(/\(.*?(?=,)/)[0];
-   tempZoom = tempZoom.slice(1);
-   const zoom = tempZoom;
+   let tempScale = getComputedStyle(document.body).transform;
+   tempScale = tempScale.match(/\(.*?(?=,)/)[0];
+   tempScale = tempScale.slice(1);
+   const scale = tempScale;
 
    const snake = document.getElementById('cagedSnake');
    if (snake.hasAttribute('hidden')) return;
@@ -81,8 +81,8 @@ function startSnakeDragging(event) {
        if (top < containerRect.top) top = containerRect.top;
        if (top > containerRect.bottom - snakeRect.height) top = containerRect.bottom - snakeRect.height;
 
-       snake.style.left = (left - containerLeft)/zoom + 'px';
-       snake.style.top = (top - containerTop)/zoom + 'px';
+       snake.style.left = (left - containerLeft)/scale + 'px';
+       snake.style.top = (top - containerTop)/scale + 'px';
    }
 
    // shows snake shape at field

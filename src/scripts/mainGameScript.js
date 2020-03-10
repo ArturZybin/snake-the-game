@@ -15,7 +15,7 @@ import {
     setScore,
     updateLeaderboard,
     setupSavedLeaderboard,
-    setupZoom
+    setupScale
 } from './interfaceManager.js';
 
 import {
@@ -42,8 +42,8 @@ export {
 }
 
 
-setupZoom();
-window.onresize = setupZoom;
+setupScale();
+window.onresize = setupScale;
 
 createNewField();
 setupSavedLeaderboard();

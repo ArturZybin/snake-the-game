@@ -11,7 +11,7 @@ export {
     setScore,
     updateLeaderboard,
     setupSavedLeaderboard,
-    setupZoom
+    setupScale
 };
 
 
@@ -49,19 +49,19 @@ function createBarriers() {
     const fieldSize = field.rows.length;
     const barriersRows = [3, 9, 13];
     const barrierLength = 10;
-    
-    for (let i=0; i < barriersRows.length; i++) {
-        
+
+    for (let i = 0; i < barriersRows.length; i++) {
+
         if (i & 1) {
-            for (let cell = 0; cell < barrierLength; cell++){
-                createBarrierCell( field.rows[ barriersRows[i] ].cells[cell] );
+            for (let cell = 0; cell < barrierLength; cell++) {
+                createBarrierCell(field.rows[barriersRows[i]].cells[cell]);
             }
         } else {
-            for (let cell = fieldSize-1; cell >= fieldSize - barrierLength; cell--) {
-                createBarrierCell( field.rows[ barriersRows[i] ].cells[cell] );
+            for (let cell = fieldSize - 1; cell >= fieldSize - barrierLength; cell--) {
+                createBarrierCell(field.rows[barriersRows[i]].cells[cell]);
             }
         }
-        
+
     }
 }
 
@@ -138,14 +138,14 @@ function updateLeaderboard() {
     const name = document.getElementById('usernameField').value;
     const score = parseInt(document.getElementById('scoreWindow').textContent);
 
-    for (let leaderIndex=0; leaderIndex < leadersList.length; leaderIndex++) {
+    for (let leaderIndex = 0; leaderIndex < leadersList.length; leaderIndex++) {
         const currentLeaderScore = leadersList[leaderIndex].querySelector('.leader-score').textContent;
 
         if (currentLeaderScore == '--||--' || parseInt(currentLeaderScore) < score) {
             // moving leaders to insert the new one
-            for (let i=leadersList.length-1; i>leaderIndex; i--) {
-                let previousName = leadersList[i-1].querySelector('.leader-name').textContent;
-                let previousIndex = leadersList[i-1].querySelector('.leader-score').textContent;
+            for (let i = leadersList.length - 1; i > leaderIndex; i--) {
+                let previousName = leadersList[i - 1].querySelector('.leader-name').textContent;
+                let previousIndex = leadersList[i - 1].querySelector('.leader-score').textContent;
                 leadersList[i].querySelector('.leader-name').textContent = previousName;
                 leadersList[i].querySelector('.leader-score').textContent = previousIndex;
             }
@@ -155,7 +155,7 @@ function updateLeaderboard() {
             break;
         }
     }
-    
+
     saveLeaderboard();
 }
 
@@ -163,21 +163,21 @@ function updateLeaderboard() {
 function saveLeaderboard() {
     const leaderboard = document.getElementById('leaderboard');
     const leadersList = Array.from(leaderboard.querySelectorAll('.leader'));
-    
+
     let leadersJSON = [];
     for (let leader of leadersList) {
         const name = leader.querySelector('.leader-name').textContent;
         const score = leader.querySelector('.leader-score').textContent;
         leadersJSON.push([name, score]);
     }
-    
+
     localStorage.setItem('leaders', JSON.stringify(leadersJSON));
 }
 
 function setupSavedLeaderboard() {
     const leaderboard = document.getElementById('leaderboard');
     const leadersList = Array.from(leaderboard.querySelectorAll('.leader'));
-    
+
     const leadersJSON = JSON.parse(localStorage.getItem('leaders'));
     if (!leadersJSON) return;
     for (let index = 0; index < leadersJSON.length; index++) {
@@ -209,7 +209,7 @@ function takeGift() {
 }
 
 
-function setupZoom() {
+function setupScale() {
     document.body.style.transform = 'scale(1)';
 
     const container = document.getElementById('container');
@@ -220,8 +220,15 @@ function setupZoom() {
     const widthRelation = windowWidth / containerRect.width;
     const heightRelation = windowHeight / containerRect.height;
 
-    if (widthRelation > 1 && heightRelation > 1) return;
+    let scale = Math.min(widthRelation, heightRelation);
+    // scale for large screens
+    if (widthRelation > 1 && heightRelation > 1) {
+        // snake shouldn't fill all screen if it is large
+        scale /= 1.4;
+        if (containerRect.width * scale < 870 || containerRect.height * scale < 620) {
+            return;
+        }
+    }
 
-    const zoom = Math.min(widthRelation, heightRelation);
-    document.body.style.transform = `scale(${zoom})`;
+    document.body.style.transform = `scale(${scale})`;
 }
