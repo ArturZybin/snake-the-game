@@ -1,5 +1,5 @@
 # Snake-the-game
-Simple browser game created using only pure JavaScript/HTML/SCSS.
+Browser game created using only pure JavaScript/HTML/SCSS.
 Almost all the elements are interactive, you can drag the snake cage and drop it to the field, take the candy gift and more
 
 Snake and field are also editable, you can set their parameters at the settings
@@ -28,7 +28,7 @@ To build the **development** version of the project to a dist folder run ```npm 
 
 ## Built With
 
-* [Webpack](https://webpack.js.org/) - _A static module bundler for JavaScript applications
+* [Webpack](https://webpack.js.org/) - A static module bundler for JavaScript applications
 
 ## Authors
 
