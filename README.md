@@ -26,6 +26,10 @@ To build the **production** version of the project to a dist folder run ```npm r
 
 To build the **development** version of the project to a dist folder run ```npm run dev``` inside the project directory
 
+## Built With
+
+* [Webpack](https://webpack.js.org/) - _A static module bundler for JavaScript applications
+
 ## Authors
 
 * **Artur Zybin** - *All the work* - [ArturZybin](https://github.com/ArturZybin)
