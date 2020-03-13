@@ -38,7 +38,7 @@ let fieldProperties = {
     barriers: false,
     poisonedPoints: false,
     bonusPoints: true,
-    passingThroughtWalls: false,
+    passingThroughWalls: false,
 }
 
 

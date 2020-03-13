@@ -143,11 +143,11 @@ function drawSnakeBorder() {
 }
 
 // can return undefined (cell with coordinated out of field)
-// if option 'passing throught walls' is off
+// if option 'passing through walls' is off
 function getNextHeadCell() {
     const snakeHead = snakeProperties.snakePartsList[0];
 
-    const passing = fieldProperties.passingThroughtWalls;
+    const passing = fieldProperties.passingThroughWalls;
 
     const fieldSize = document.getElementById('field').rows.length;
     const currentRow = snakeHead.closest('tr').rowIndex;
